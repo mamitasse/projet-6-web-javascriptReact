@@ -12,42 +12,51 @@ function getUserCardDOM() {
   return article;
 }
 
-// j'utilise fetch() pour charger le fichier JSON local
-function photographerTemplate(data) {
-  const { name, portrait } = data;
-  const picture = `assets/photographers/${portrait}`;
-return { name, picture, getUserCardDOM };
+
+
+// je créez la méthode fetchData pour récupérer les données
+async function fetchData() {
+  try {
+    const response = await fetch("./data/photographers.json");
+    
+    if (!response.ok) {
+      throw new Error("Impossible de récupérer les données");
+    }
+    
+    const data = await response.json();
+    return data;
+  } catch (error) {
+    console.error("Une erreur s'est produite lors de la récupération des données JSON :", error);
+    return null;
+  }
 }
 
-fetch("./data/photographers.json")
-  .then((response) => response.json())
-  .then((data) => {
-    // Maintenant, on a acces aux données JSON dans la variable "data"
+//je crée une fonction pour afficher les photographes
+function displayPhotographersInfos(data) {
+  if (data && data.photographers) {
+    data.photographers.forEach((photographer) => {
+      const photographerElement = document.createElement("article");
+      photographerElement.classList.add("photographer");
 
-  
-    if (data.photographers) {
-      // on parcoure le tableau des photographes et crée un élément HTML pour chacun d'eux
-      data.photographers.forEach((photographer) => {
-        const photographerElement = document.createElement("article");
-        photographerElement.classList.add("photographer");
+      photographerElement.innerHTML = `
+        <img src="assets/photographers/Sample Photos/Photographers ID Photos/${photographer.portrait}" alt="${photographer.name}" class="portrait">
+        <h2>${photographer.name}</h2>
+        <p class="infoVille">${photographer.city}, ${photographer.country}</p>
+        <p class="info">${photographer.tagline}</p>
+        <p class="info">Price: ${photographer.price}</p>
+      `;
 
-        // je crée le contenu HTML pour chaque photographe 
-        photographerElement.innerHTML = `
-          <img src="assets/photographers/Sample Photos/Photographers ID Photos/${photographer.portrait}" alt="${photographer.name}" class="portrait">
-          <h2>${photographer.name}</h2>
-          <p class="infoVille">${photographer.city}, ${photographer.country}</p>
-          <p class="info">${photographer.tagline}</p>
-          <p class="info">Price: ${photographer.price}</p>
-        `;
+      photographerSection.appendChild(photographerElement);
+    });
+  }
+}
 
-        // j'ajoute l'élément du photographe à la section des photographes
-        photographerSection.appendChild(photographerElement);
-      });
-    }
-  })
-  .catch((error) => {
-    console.error(
-      "Une erreur s'est produite lors de la récupération des données JSON :",
-      error
-    );
-  });
+// Appel de la méthode fetchData et affichage des données
+async function init() {
+  const data = await fetchData();
+  if (data) {
+    displayPhotographersInfos(data);
+  }
+}
+
+init();
