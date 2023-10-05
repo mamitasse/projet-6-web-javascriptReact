@@ -37,7 +37,7 @@ class DetailPhotographerView {
         // Afficher les médias du photographe
         const mediaContainer = document.getElementById("catalogue");
         totalMedia.forEach((media) => {
-            if (media.type === "image") {
+         
                 mediaContainer.innerHTML += `
                     <div class="media">
                     <img src="assets/photographers/Sample Photos/${photographer.name}-${photographerId}/${media.image}" alt="${media.title}" />
@@ -46,22 +46,7 @@ class DetailPhotographerView {
                         <p>Price: ${media.price}</p>
                     </div>
                 `;
-            } else if (media.type === "video") {
-                mediaContainer.innerHTML += `
-                    <div class="media">
-                    <video controls autoplay>
-  <source src="assets/photographers/Sample Photos/${photographer.name}-${photographerId}/${media.video}" type="video/mp4">
- </video>
-                        <video controls>
-                            <source src="assets/photographers/Sample Photos/${photographer.name}-${photographerId}/${media.video}" type="video/mp4">
-                            Your browser does not support the video tag.
-                        </video>
-                        <p>${media.title}</p>
-                        <p>Likes: ${media.likes}</p>
-                        <p>Price: ${media.price}</p>
-                    </div>
-                `;
-            }
+            
         });
     }
 }
