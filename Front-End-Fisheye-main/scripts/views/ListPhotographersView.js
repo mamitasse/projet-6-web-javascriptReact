@@ -9,18 +9,26 @@ class ListPhotographersView {
             data.photographers.forEach((photographer) => {
                 const photographerElement = document.createElement("article");
                 photographerElement.classList.add("photographer");
+                
 
                 photographerElement.innerHTML = `
-            <img src="assets/photographers/Sample Photos/Photographers ID Photos/${photographer.portrait}" alt="${photographer.name}" class="portrait">
+                <a href="photographer.html?id=${photographer.id}" aria-label="View ${photographer.name}'s profile">
+                <img src="assets/photographers/Sample Photos/Photographers ID Photos/${photographer.portrait}" alt="${photographer.name}" class="portrait">
+                </a>
             <h2>${photographer.name}</h2>
             <p class="infoVille">${photographer.city}, ${photographer.country}</p>
             <p class="info">${photographer.tagline}</p>
-            <p class="info">Price: ${photographer.price}</p>
+            <p class="info"> ${photographer.price}€/jour</p>
         `;
+        photographerElement.querySelector("a").addEventListener("click", (e) => {
+            e.preventDefault(); // Empêche le lien de naviguer vers la page
+            const photographerId = photographer.id;
+            window.location.href = `photographer.html?id=${photographerId}`;
+        });
 
-                photographerSection.appendChild(photographerElement);
-            });
-        }
-    }
+        photographerSection.appendChild(photographerElement);
+    });
+}
+}
 }
 

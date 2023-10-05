@@ -14,15 +14,27 @@ class Controller {
 
     async initDetailPhotographerPage() {
         // Récupération de l'id du photographe dans l'url. 
+      
+    function getPhotographerIdFromURL() {
+    const urlParams = new URLSearchParams(window.location.search);
+    const photographerId = urlParams.get("id");
+    return photographerId;
+}
+
+// Utilisation de la fonction pour obtenir l'ID du photographe actuellement affiché
+const photographerId = getPhotographerIdFromURL();
 
         let model = new Model();
         // Récupération des infos du photographe
+        
+    // Récupérer les médias du photographe
+    
+        
 
         // Récupération des médias du photographe
-        let totalMedia = await model.getMediaByPhotographerId(243)
+        const totalMedia = await model.getMediaByPhotographerId(parseInt(photographerId));
         
-        let view = new DetailPhotographerView();
-        view.display(totalMedia);
+        
         
         // Affichage des infos. 
     }
