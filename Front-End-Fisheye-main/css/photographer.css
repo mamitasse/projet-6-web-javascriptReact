@@ -16,12 +16,11 @@
     flex-direction: column;
 
     align-items: center;
-    
   }
   .photographer-info {
     margin-bottom: 20px;
-width: auto;
-}
+    width: auto;
+  }
 }
 .photographer-photo {
   display: flex;
@@ -40,8 +39,9 @@ width: auto;
 .photographer-info {
   display: flex;
   flex-direction: column;
-  align-items: baseline;
+  align-items: center;
   width: auto;
+  text-align: center;
 }
 .photograph-header p {
   color: #901c1c;
@@ -51,6 +51,7 @@ width: auto;
   font-weight: 400;
   line-height: normal;
   margin: 0;
+  text-align: center;
 }
 
 .photograph-header h1 {
@@ -134,7 +135,7 @@ main {
   align-items: baseline;
 }
 .media img {
-  width: 350px;
+  width: 97%;
   height: 300px;
   object-fit: cover;
   border-radius: 5px;
@@ -142,38 +143,37 @@ main {
 .media {
   margin-top: 40px;
 }
-.media p{
-    color: #901C1C;
-font-family: DM Sans;
-font-size: 24px;
-font-style: normal;
-font-weight: 400;
-line-height: normal;
-margin: 0%;
+.media p {
+  color: #901c1c;
+  font-family: DM Sans;
+  font-size: 24px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: normal;
+  margin: 0%;
 }
 #catalogue {
-    width: 100%;
+  width: 95%;
+  margin: 3%;
   display: grid;
   grid-template-columns: repeat(3, 1fr);
   gap: 10px;
 }
 @media screen and (max-width: 1000px) {
-    #catalogue {
-        
-        grid-template-columns: repeat(2, 1fr);
-        
-      }
+  #catalogue {
+    grid-template-columns: repeat(2, 1fr);
+  }
 }
-@media screen and (max-width: 700px){
-    #catalogue {
-        
-        grid-template-columns: repeat(1, 1fr);
-        
-      }
+@media screen and (max-width: 700px) {
+  #catalogue {
+    grid-template-columns: repeat(1, 1fr);
+  }
 }
 
-.logo {
+header img {
   height: 50px;
-  margin-left: 100px;
+  margin-left: 0px;
   margin-bottom: 30px;
+  margin-top: 2%;
+  margin-left: 5%;
 }
