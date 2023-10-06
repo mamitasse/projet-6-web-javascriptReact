@@ -16,8 +16,8 @@
   <body>
     <header>
       <a href="index.html" class="logo">
-        <img src="assets/images/logo.png" alt="fisheye logo">
-    </a>
+        <img src="assets/images/logo.png" alt="fisheye logo" />
+      </a>
     </header>
     <main id="main">
       <div class="photograph-header">
@@ -25,6 +25,15 @@
           Contactez-moi
         </button>
       </div>
+      <div id="select">
+        <label for="oderSelect">Trier par</label>
+        <select name="orderSelect" id="orderSelect">
+          <option value="pop">Popularité</option>
+          <option value="date">Date</option>
+          <option value="title">Titre</option>
+        </select>
+      </div>
+    </div>
       <div id="catalogue"></div>
     </main>
     <div id="contact_modal">

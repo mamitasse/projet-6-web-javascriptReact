@@ -140,6 +140,12 @@ main {
   object-fit: cover;
   border-radius: 5px;
 }
+.media video{
+  width: 97%;
+  height: 300px;
+  object-fit: cover;
+  border-radius: 5px;
+}
 .media {
   margin-top: 40px;
 }
@@ -176,4 +182,20 @@ header img {
   margin-bottom: 30px;
   margin-top: 2%;
   margin-left: 5%;
+}
+#select {
+	margin: 25px 100px;
+}
+
+#select>label {
+	margin-right: 25px;
+	font-weight: bold;
+}
+
+#orderSelect {
+	height: 50px;
+	padding: 0 10px;
+	background-color: #901c1c;
+	border-radius: 5px;
+	color: white;
 }

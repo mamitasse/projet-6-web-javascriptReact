@@ -50,7 +50,7 @@ class DetailPhotographerView {
                 mediaContainer.innerHTML += `
                     <div class="media">
                     <video controls autoplay>
-  <source src="assets/photographers/Sample Photos/${photographer.name}-${photographerId}/${media.video}" type="video/mp4">
+  <video src="assets/photographers/Sample Photos/${photographer.name}-${photographerId}/${media.video}" type="video/mp4">
  </video>
                       
                         <p>${media.title}</p>
