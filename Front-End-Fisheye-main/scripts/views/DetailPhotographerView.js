@@ -24,8 +24,9 @@ class DetailPhotographerView {
                 <h1>${photographer.name}</h1>
                 <p>${photographer.city}, ${photographer.country}</p>
                 <p>${photographer.tagline}</p>
+                </div> 
                 <button class="contact_button" onclick="displayModal()">Contactez-moi</button>
-            </div>
+           
             <div class="photographer-photo">
                 <img src="assets/photographers/Sample Photos/Photographers ID Photos/${photographer.portrait}" alt="${photographer.name}" />
             </div>

@@ -3,11 +3,32 @@
 }
 
 .photograph-header {
+  width: 100%;
   background-color: #fafafa;
-  height: 300px;
-  margin: 0 100px;
-  margin-bottom: 30px;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  gap: 2%;
 }
+@media screen and (max-width: 700px) {
+  .photograph-header {
+    display: flex;
+    flex-direction: column;
+
+    align-items: center;
+    
+  }
+  .photographer-info {
+    margin-bottom: 20px;
+width: auto;
+}
+}
+.photographer-photo {
+  display: flex;
+  justify-content: flex-end;
+  padding-top: 50px;
+}
+
 .photograph-header img {
   height: 200px;
   width: 200px;
@@ -18,8 +39,28 @@
 }
 .photographer-info {
   display: flex;
-  flex-direction: row;
+  flex-direction: column;
   align-items: baseline;
+  width: auto;
+}
+.photograph-header p {
+  color: #901c1c;
+  font-family: DM Sans;
+  font-size: 24px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: normal;
+  margin: 0;
+}
+
+.photograph-header h1 {
+  color: #d3573c;
+  font-family: DM Sans;
+  font-size: 64px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: normal;
+  margin: 0;
 }
 .contact_button {
   font-size: 20px;
@@ -98,13 +139,41 @@ main {
   object-fit: cover;
   border-radius: 5px;
 }
-.media{
-    margin-top: 40px;
- 
+.media {
+  margin-top: 40px;
 }
-#catalogue{
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 10px
-    ;
+.media p{
+    color: #901C1C;
+font-family: DM Sans;
+font-size: 24px;
+font-style: normal;
+font-weight: 400;
+line-height: normal;
+margin: 0%;
+}
+#catalogue {
+    width: 100%;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 10px;
+}
+@media screen and (max-width: 1000px) {
+    #catalogue {
+        
+        grid-template-columns: repeat(2, 1fr);
+        
+      }
+}
+@media screen and (max-width: 700px){
+    #catalogue {
+        
+        grid-template-columns: repeat(1, 1fr);
+        
+      }
+}
+
+.logo {
+  height: 50px;
+  margin-left: 100px;
+  margin-bottom: 30px;
 }
