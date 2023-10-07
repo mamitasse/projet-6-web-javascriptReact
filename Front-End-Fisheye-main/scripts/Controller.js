@@ -21,23 +21,8 @@ class Controller {
     return photographerId;
 }
 
-// Utilisation de la fonction pour obtenir l'ID du photographe actuellement affiché
-const photographerId = getPhotographerIdFromURL();
-
-        let model = new Model();
-        // Récupération des infos du photographe
-        
-    // Récupérer les médias du photographe
-    
-        
-
-        // Récupération des médias du photographe
-        const totalMedia = await model.getMediaByPhotographerId(parseInt(photographerId));
-        
-        
-        
-        // Affichage des infos. 
     }
+    
 
 
 }
