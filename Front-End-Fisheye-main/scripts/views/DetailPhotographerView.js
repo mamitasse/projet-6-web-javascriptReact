@@ -53,17 +53,18 @@ class DetailPhotographerView {
         if (media.image) {
           mediaElement.innerHTML = `
             <img src="assets/photographers/Sample Photos/${photographer.name}-${photographerId}/${media.image}" alt="${media.title}" />
-            <p>${media.title}</p>
-            <p>Likes: ${media.likes}</p>
-            <p>Price: ${media.price}</p>
+           <div class="info"> <p>${media.title}</p>
+           <p >${media.likes} <span><img src="assets/icons/coeur.svg" alt="coeur"><span/></p><div/>
+           
           `;
+          /* <p>Price: ${media.price}</p> a revoir*/
         } else if (media.video) {
           mediaElement.innerHTML = `
             <video src="assets/photographers/Sample Photos/${photographer.name}-${photographerId}/${media.video}" controls autoplay></video>
-            <p>${media.title}</p>
-            <p>Likes: ${media.likes}</p>
-            <p>Price: ${media.price}</p>
-          `;
+            <div class="info"> <p>${media.title}</p>
+            <p  >${media.likes} <span><img src="assets/icons/coeur.svg" alt="coeur"><span/></p><div/>
+           
+          `;// <p>Price: ${media.price}</p>
         }
   
         mediaContainer.appendChild(mediaElement); // Ajoutez l'élément au conteneur des médias

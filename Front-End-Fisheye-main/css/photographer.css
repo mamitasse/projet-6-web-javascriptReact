@@ -184,7 +184,13 @@ header img {
   margin-left: 5%;
 }
 #select {
-	margin: 25px 100px;
+	padding-right: 70%;
+  margin-top: 20px;
+}
+@media screen and (max-width: 917px) {
+  #select {
+    padding-right: 50%;
+  }
 }
 
 #select>label {
@@ -200,7 +206,7 @@ header img {
 	color: white;
 }
 
-#orderSelect option {
+#orderSelect option ::after{
 	height: 100px;
 	padding: 0 10px;
 	background-color: #901c1c;
@@ -211,4 +217,25 @@ header img {
   gap: 20px;
   
 }
-  
+.media p span img{
+  height: 24px;
+  width: 24px;
+  object-fit: cover;
+} 
+.info{
+  color: #901C1C;
+  font-family: DM Sans;
+  font-size: 24px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: normal;
+}
+.likes{
+  text-align: end;
+
+}
+.media .likes{
+  display: flex;
+align-items: end;
+flex-direction: row;
+}
