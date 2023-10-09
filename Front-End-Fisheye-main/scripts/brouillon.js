@@ -1,37 +1,30 @@
+// Gestionnaire d'événement pour le bouton de tri principal
+const toggleDropdownButton = document.getElementById("toggleDropdown");
+const dropdownContent = document.getElementById("dropdownContent");
+const chevron = document.querySelector(".chevron");
 
- // Fonction pour afficher la modal de contact
-function displayModal() {
-    const contactModal = document.getElementById("contact_modal");
-    contactModal.style.display = "block";
+toggleDropdownButton.addEventListener("click", () => {
+  if (dropdownContent.style.display === "block") {
+    dropdownContent.style.display = "none";
+    chevron.classList.remove("rotate");
+  } else {
+    dropdownContent.style.display = "block";
+    chevron.classList.add("rotate");
   }
-  
-  // Fonction pour fermer la modal de contact
-  function closeModal() {
-    const contactModal = document.getElementById("contact_modal");
-    contactModal.style.display = "none";
-  }
+});
 
-  // Création d'une instance de Controller et initialisation de la page
-  let controller = new Controller();
-  controller.initDetailPhotographerPage();
+// Gestionnaires d'événement pour les options de tri
+const sortByTitle = document.getElementById("sortByTitle");
+sortByTitle.addEventListener("click", () => {
+  // Tri par titre
+  detailPhotographerView.sortMediaByTitle();
+  toggleDropdown();
+});
 
-  // je sélectionnez le sélecteur de tri
-  const orderSelect = document.getElementById("orderSelect");
-
-  // je cree une instance de DetailPhotographerView
-  const detailPhotographerView = new DetailPhotographerView();
-
-  // j'ajoute un gestionnaire d'événement pour le changement de sélection
-  orderSelect.addEventListener("change", () => {
-    const selectedOption = orderSelect.value;
-    if (selectedOption === "pop") {
-      // je triez les médias par popularité
-      detailPhotographerView.sortMediaByPopularity();
-    } else if (selectedOption === "date") {
-      // je triez les médias par date
-      detailPhotographerView.sortMediaByDate();
-    } else if (selectedOption === "title") {
-      // Triez les médias par titre
-      detailPhotographerView.sortMediaByTitle();
-    }
-  });
+const sortByDate = document.getElementById("sortByDate");
+sortByDate.addEventListener("click", () => {
+  // Tri par date
+  detailPhotographerView.sortMediaByDate();
+  toggleDropdown();
+});
+A
