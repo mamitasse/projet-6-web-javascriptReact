@@ -1,23 +1,9 @@
 class DetailPhotographerView {
-    // Récupération de l'ID du photographe depuis l'URL
-    getPhotographerIdFromURL() {
-      const urlParams = new URLSearchParams(window.location.search);
-      const photographerId = urlParams.get("id");
-      return photographerId;
-    }
+  
   
     // Fonction pour afficher les détails du photographe
-    async displayPhotographerDetails() {
-      const photographerId = this.getPhotographerIdFromURL();
-  
-      // Récupérer les données du photographe depuis le modèle
-      let model = new Model();
-      const photographerData = await model.fetchData();
-  
-      // Trouver le photographe correspondant à l'ID
-      const photographer = photographerData.photographers.find(
-        (p) => p.id === parseInt(photographerId)
-      );
+    async displayPhotographerDetails(photographer,totalMedia) {
+ 
   
       // Afficher les informations du photographe sur la page
       const photographerHeader = document.querySelector(".photograph-header");
@@ -33,10 +19,7 @@ class DetailPhotographerView {
         </div>
       `;
   
-      // Récupérer les médias du photographe
-      const totalMedia = await model.getMediaByPhotographerId(
-        parseInt(photographerId)
-      );
+     
   
       // Afficher les médias du photographe
       const mediaContainer = document.getElementById("catalogue");
@@ -52,17 +35,17 @@ class DetailPhotographerView {
   
         if (media.image) {
           mediaElement.innerHTML = `
-            <img src="assets/photographers/Sample Photos/${photographer.name}-${photographerId}/${media.image}" alt="${media.title}" />
+            <img src="assets/photographers/Sample Photos/${photographer.name}-${photographer.id}/${media.image}" alt="${media.title}" />
            <div class="info"> <p>${media.title}</p>
-           <p >${media.likes} <span><img src="assets/icons/coeur.svg" alt="coeur"><span/></p><div/>
+           <p class="likes" id=" ">${media.likes} <span><img src="assets/icons/coeur.svg" alt="coeur"><span/></p><div/>
            
           `;
           /* <p>Price: ${media.price}</p> a revoir*/
         } else if (media.video) {
           mediaElement.innerHTML = `
-            <video src="assets/photographers/Sample Photos/${photographer.name}-${photographerId}/${media.video}" controls autoplay></video>
+            <video src="assets/photographers/Sample Photos/${photographer.name}-${photographer.id}/${media.video}" controls autoplay></video>
             <div class="info"> <p>${media.title}</p>
-            <p  >${media.likes} <span><img src="assets/icons/coeur.svg" alt="coeur"><span/></p><div/>
+            <p class="likes" id="likes" >${media.likes} <span><img src="assets/icons/coeur.svg" alt="coeur"><span/></p><div/>
            
           `;// <p>Price: ${media.price}</p>
         }
@@ -70,7 +53,11 @@ class DetailPhotographerView {
         mediaContainer.appendChild(mediaElement); // Ajoutez l'élément au conteneur des médias
       });
     }
+    
+
+    
   
+    
     // Méthode pour trier les médias par popularité
     sortMediaByPopularity() {
       const mediaContainer = document.getElementById("catalogue");
@@ -120,9 +107,31 @@ class DetailPhotographerView {
         mediaContainer.appendChild(mediaElement);
       });
     }
+
+     openCloseFilterMenu = () => {
+      const filterMenu = document.querySelector(".dropdown_content");
+      const filterMenuButton = document.querySelector(".btn_drop");
+      const filterButtons = document.querySelectorAll(".dropdown_content button");
+  
+      filterMenuButton.addEventListener("click", () => {
+          const isExpanded = filterMenuButton.getAttribute("aria-expanded") === "true" || false;
+          filterMenuButton.setAttribute("aria-expanded", !isExpanded);
+          filterMenu.classList.toggle("curtain_effect");
+          document.querySelector(".fa-chevron-up").classList.toggle("rotate");
+  
+          const newAriaHiddenValue = filterMenu.classList.contains("curtain_effect") ? "false" : "true";
+          filterMenu.setAttribute("aria-hidden", newAriaHiddenValue);
+  
+          const newTabIndexValue = filterMenu.classList.contains("curtain_effect") ? "0" : "-1";
+          filterButtons.forEach(button => button.setAttribute("tabindex", newTabIndexValue));
+      });
+  };
+
   }
   
-  window.addEventListener("load", () => {
+
+
+/*  window.addEventListener("load", () => {
     const detailPhotographerView = new DetailPhotographerView();
     detailPhotographerView.displayPhotographerDetails();
   
@@ -143,4 +152,4 @@ class DetailPhotographerView {
         detailPhotographerView.sortMediaByTitle();
       }
     });
-  });
+  });*/

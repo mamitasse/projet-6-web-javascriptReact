@@ -39,7 +39,7 @@
 .photographer-info {
   display: flex;
   flex-direction: column;
- 
+
   width: auto;
   text-align: start;
 }
@@ -51,7 +51,7 @@
   font-weight: 400;
   line-height: normal;
   margin: 0;
-  text-align:start;
+  text-align: start;
 }
 
 .photograph-header h1 {
@@ -140,7 +140,7 @@ main {
   object-fit: cover;
   border-radius: 5px;
 }
-.media video{
+.media video {
   width: 97%;
   height: 300px;
   object-fit: cover;
@@ -184,7 +184,7 @@ header img {
   margin-left: 5%;
 }
 #select {
-	padding-right: 70%;
+  padding-right: 70%;
   margin-top: 20px;
 }
 @media screen and (max-width: 917px) {
@@ -193,49 +193,39 @@ header img {
   }
 }
 
-#select>label {
-	margin-right: 25px;
-	font-weight: bold;
+#select > label {
+  margin-right: 25px;
+  font-weight: bold;
 }
 
 #orderSelect {
-	height: 50px;
-	padding: 0 10px;
-	background-color: #901c1c;
-	border-radius: 5px;
-	color: white;
+  height: 50px;
+  padding: 0 10px;
+  background-color: #901c1c;
+  border-radius: 5px;
+  color: white;
 }
 
-#orderSelect option ::after{
-	height: 100px;
-	padding: 0 10px;
-	background-color: #901c1c;
-	border-radius: 5px;
-	color: white;
-  font-weight: bold; /* Poids de la police */
-  padding: 0 10px;
-  gap: 20px;
-  
+#orderSelect option ::after {
 }
-.media p span img{
+.media p span img {
   height: 24px;
   width: 24px;
   object-fit: cover;
-} 
-.info{
-  color: #901C1C;
+}
+.info {
+  color: #901c1c;
   font-family: DM Sans;
   font-size: 24px;
   font-style: normal;
   font-weight: 400;
   line-height: normal;
 }
-.likes{
+.likes {
   text-align: end;
-
 }
-.media .likes{
+.media .likes {
   display: flex;
-align-items: end;
-flex-direction: row;
+  align-items: end;
+  flex-direction: row;
 }
