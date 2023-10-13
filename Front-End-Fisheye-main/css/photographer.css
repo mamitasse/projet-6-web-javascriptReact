@@ -173,6 +173,7 @@ main {
 @media screen and (max-width: 700px) {
   #catalogue {
     grid-template-columns: repeat(1, 1fr);
+    align-items: center;
   }
 }
 
@@ -258,5 +259,121 @@ width: 130px;
   ;
 }
 body{
+  margin-left: 25px;
+}
+
+
+.chevron {
+  font-size: 12px;
+  margin-left: 4px;
+  transition: transform 0.2s ease;
+}
+
+/* Lightbox */
+#lightbox {
+  display: none;
+  position: fixed;
+  top: 10px;
+  left: 30px;
+  width: 100%;
+  height: 100%;
+  background:#fff;
+  z-index: 999;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  
+}
+
+.lightbox__content {
+  position: relative;
+width: 90%;
+  height: 90%;
+  background: #fff;
+  border: 2px solid #95FFF9;
+  margin: 0px;
+  margin-top: 30px;
+  margin-left: 50px;
+  
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+  overflow: hidden;
+}
+.fa-solid, .fas{
+  color: rgba(144, 28, 28, 1);
+
+}
+.lightbox__previous,
+.lightbox__next {
+  position: absolute;
+  width: 40px; /*#fff; Ajustez la largeur des chevrons */
+  background-color: transparent;
+  color: rgba(144, 28, 28, 1);
+  text-align: center;
+  line-height: 100%;
+ 
+  font-size: 50px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  top: 50%; /* Centre verticalement */
+  transform: translateY(-50%); /* Centre verticalement */
+ 
+  padding: 0;
+  border: #fff;
+
+}
+
+.lightbox__previous {
+  left: 0;
   margin-left: 15px;
+}
+
+.lightbox__next {
+  right: 0;
+  margin-right: 15px;
+}
+
+.lightbox__media {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+ width: 95%;
+  height:95%;
+  
+ 
+}
+.lightbox__media img,.lightbox__media video{
+  width:95%;
+  height: 90%;
+margin-left: 36px;
+  overflow: hidden;
+  object-fit: cover;
+
+  border: 20px solid #fff; /* Ajoute une bordure blanche de 10 pixels */
+}
+
+.close-btn {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  font-size: 50px;
+  cursor: pointer;
+  color: rgba(144, 28, 28, 1);
+  background-color: transparent;
+  z-index: 1; /* Pour placer au-dessus de la photo */
+  padding: 0;
+  border: #fff;
+}
+.lightbox__title{
+  color: #901C1C;
+font-family: DM Sans;
+font-size: 24px;
+font-style: normal;
+font-weight: 400;
+line-height: normal;
+margin-left: 60px;
+margin-bottom: 60px;
+margin-top: 0px;
+padding: 0;
 }

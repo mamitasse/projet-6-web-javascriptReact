@@ -5,7 +5,7 @@ class Model {
     // je créez la méthode fetchData pour récupérer les données
     async fetchData() {
       if (this.data == null) {
-        console.log("Premier appel : je renseigne la variable data");
+       
         try {
           const response = await fetch("./data/photographers.json");
   
@@ -22,18 +22,18 @@ class Model {
           return null;
         }
       }
-      console.log("Je retourne la donnée");
+   
       return this.data;
     }
   
     async getMediaByPhotographerId(photographerId) {
       let data = await this.fetchData();
-      console.log("PhotographerID = ", photographerId);
-      console.log(data);
+     
+     
       let totalMedia = [];
       for (let media of data.media) {
         if (media.photographerId === photographerId) {
-          console.log(media);
+          
           totalMedia.push(media);
         }
       }

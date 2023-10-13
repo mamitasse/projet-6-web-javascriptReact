@@ -32,7 +32,7 @@
                   <button class="dropdown-button" id="toggleDropdown">
                     Popularité <i class="fa fa-chevron-down  chevron"></i>
                   </button>
-                  <div class="dropdown-content" id="dropdownContent">
+                  <div class="dropdown-content" id="dropdownContent" style="display: none;">
                     <button id="sortByTitle">Titre</button>
                     <div class="trait">  </div>
                     <button id="sortByDate">Date</button>
@@ -57,10 +57,28 @@
                   </form>
                 </div>
               </div>
+              <div id="lightbox" style="display: none;">
+                <div class="lightbox__content" aria-label="image closeup view">
+                  <button class="close-btn" role="button" aria-label="Fermer la lightbox">X</button>
+                  <a class="lightbox__previous" role="button" aria-label="Image précédente" tabindex="0">
+                    <i class="fa-solid fa-chevron-left" tabindex="0"></i>
+                  </a>
+                  <div class="lightbox__media">
+                    <!-- L'image ou la vidéo va ici -->
+                  </div>
+                  <a class="lightbox__next" role="button" aria-label="Image suivante" tabindex="0">
+                    <i class="fa-solid fa-chevron-right" tabindex="0"></i>
+                  </a>
+                  <div class="lightbox__title">Titre du média</div>
+                </div>
+                
+              </div>
+
               <script src="/scripts/utils/contactForm.js"></script>
               <script src="scripts/Model.js"></script>
               <script src="scripts/views/DetailPhotographerView.js"></script>
               <script src="scripts/Controller.js"></script>
+ 
            
           
               <script>

@@ -29,10 +29,10 @@ class Controller {
         parseInt(photographerId)
       );
   
-      const detailPhotographerView = new DetailPhotographerView(photographer,);
+      const detailPhotographerView = new DetailPhotographerView(photographer,totalMedia);
       detailPhotographerView.displayPhotographerDetails(photographer, totalMedia);
   
      
       }; // Récupération de l'id du photographe dans l'url.
     }
-  
+ 

@@ -1,34 +1,49 @@
 class DetailPhotographerView {
-  
-  
-  // Fonction pour afficher les détails du photographe
-  async displayPhotographerDetails(photographer,totalMedia) {
+  constructor() {
+    this.totalMedia = [];
+    this.currentMediaIndex = 0;
+    this.lightbox = document.getElementById("lightbox");
+    this.lightboxMedia = document.querySelector(".lightbox__media");
+    this.lightboxTitle = document.querySelector(".lightbox__title");
 
+    // Sélectionnez les boutons Next et Previous et ajoutez des écouteurs d'événements
+    this.nextButton = document.querySelector(".lightbox__next");
+    this.previousButton = document.querySelector(".lightbox__previous");
 
-    // Afficher les informations du photographe sur la page
+    this.nextButton.addEventListener("click", () => {
+      this.showNextMedia();
+    });
+
+    this.previousButton.addEventListener("click", () => {
+      this.showPreviousMedia();
+    });
+
+    this.setupMediaEventHandlers();
+  }
+
+  displayPhotographerDetails(photographer, totalMedia) {
+    this.totalMedia = totalMedia;
+    this.photographer = photographer;
+
     const photographerHeader = document.querySelector(".photograph-header");
     photographerHeader.innerHTML = `
       <div class="photographer-info">
         <h1>${photographer.name}</h1>
         <p>${photographer.city}, ${photographer.country}</p>
         <p>${photographer.tagline}</p>
-      </div> 
+      </div>
       <button class="contact_button" onclick="displayModal()">Contactez-moi</button>
       <div class="photographer-photo">
         <img src="assets/photographers/Sample Photos/Photographers ID Photos/${photographer.portrait}" alt="${photographer.name}" />
       </div>
     `;
 
-   
-
-    // Afficher les médias du photographe
     const mediaContainer = document.getElementById("catalogue");
+    mediaContainer.innerHTML = "";
 
-    totalMedia.forEach((media) => {
-      const mediaElement = document.createElement("div"); // Créez un nouvel élément pour chaque média
-      mediaElement.classList.add("media"); // Ajoutez la classe "media" à l'élément
-
-      // Définissez les attributs data-likes, data-date et data-title en utilisant les valeurs de l'objet media
+    totalMedia.forEach((media, index) => {
+      const mediaElement = document.createElement("div");
+      mediaElement.classList.add("media");
       mediaElement.setAttribute("data-likes", media.likes);
       mediaElement.setAttribute("data-date", media.date);
       mediaElement.setAttribute("data-title", media.title);
@@ -36,47 +51,48 @@ class DetailPhotographerView {
       if (media.image) {
         mediaElement.innerHTML = `
           <img src="assets/photographers/Sample Photos/${photographer.name}-${photographer.id}/${media.image}" alt="${media.title}" />
-         <div class="info"> <p>${media.title}</p>
-         <p class="likes" id=" ">${media.likes} <span><img src="assets/icons/coeur.svg" alt="coeur"><span/></p><div/>
-         
+          <div class="info">
+            <p>${media.title}</p>
+            <p class="likes" id="likes">${media.likes} <span><img src="assets/icons/coeur.svg" alt="coeur"></span></p>
+          </div>
         `;
-        /* <p>Price: ${media.price}</p> a revoir*/
+
+        mediaElement.addEventListener("click", () => {
+          this.openLightbox(index, photographer);
+        });
       } else if (media.video) {
         mediaElement.innerHTML = `
           <video src="assets/photographers/Sample Photos/${photographer.name}-${photographer.id}/${media.video}" controls autoplay></video>
-          <div class="info"> <p>${media.title}</p>
-          <p class="likes" id="likes" >${media.likes} <span><img src="assets/icons/coeur.svg" alt="coeur"><span/></p><div/>
-         
-        `;// <p>Price: ${media.price}</p>
+          <div class "info">
+            <p>${media.title}</p>
+            <p class="likes" id="likes">${media.likes} <span><img src="assets/icons/coeur.svg" alt="coeur"></span></p>
+          </div>
+        `;
+
+        mediaElement.addEventListener("click", () => {
+          this.openLightbox(index, photographer);
+        });
       }
 
-      mediaContainer.appendChild(mediaElement); // Ajoutez l'élément au conteneur des médias
+      mediaContainer.appendChild(mediaElement);
     });
   }
-  
 
-  
-
-  
-  // Méthode pour trier les médias par popularité
   sortMediaByPopularity() {
     const mediaContainer = document.getElementById("catalogue");
     const mediaElements = Array.from(mediaContainer.querySelectorAll(".media"));
 
-    // Triez les médias par popularité (du plus élevé au plus bas)
     mediaElements.sort((a, b) => {
       const likesA = parseInt(a.getAttribute("data-likes"));
       const likesB = parseInt(b.getAttribute("data-likes"));
       return likesB - likesA;
     });
 
-    // Réorganisez les éléments dans le conteneur
     mediaElements.forEach((mediaElement) => {
       mediaContainer.appendChild(mediaElement);
     });
   }
 
-  // Méthode pour trier les médias par date
   sortMediaByDate() {
     const mediaContainer = document.getElementById("catalogue");
     const mediaElements = Array.from(mediaContainer.querySelectorAll(".media"));
@@ -92,7 +108,6 @@ class DetailPhotographerView {
     });
   }
 
-  // Méthode pour trier les médias par titre
   sortMediaByTitle() {
     const mediaContainer = document.getElementById("catalogue");
     const mediaElements = Array.from(mediaContainer.querySelectorAll(".media"));
@@ -108,31 +123,58 @@ class DetailPhotographerView {
     });
   }
 
-   openCloseFilterMenu = () => {
-    const filterMenu = document.querySelector(".dropdown_content");
-    const filterMenuButton = document.querySelector(".btn_drop");
-    const filterButtons = document.querySelectorAll(".dropdown_content button");
+  setupMediaEventHandlers() {
+    const mediaElements = document.querySelectorAll("#catalogue .media img, #catalogue .media video");
 
-    filterMenuButton.addEventListener("click", () => {
-        const isExpanded = filterMenuButton.getAttribute("aria-expanded") === "true" || false;
-        filterMenuButton.setAttribute("aria-expanded", !isExpanded);
-        filterMenu.classList.toggle("curtain_effect");
-        document.querySelector(".fa-chevron-up").classList.toggle("rotate");
-
-        const newAriaHiddenValue = filterMenu.classList.contains("curtain_effect") ? "false" : "true";
-        filterMenu.setAttribute("aria-hidden", newAriaHiddenValue);
-
-        const newTabIndexValue = filterMenu.classList.contains("curtain_effect") ? "0" : "-1";
-        filterButtons.forEach(button => button.setAttribute("tabindex", newTabIndexValue));
+    mediaElements.forEach((media, index) => {
+      media.addEventListener("click", () => {
+        this.openLightbox(index, this.photographer); // Utilisez this.photographer
+      });
     });
-};
+  }
 
+  openLightbox(index, photographer) {
+    this.currentMediaIndex = index;
+    const media = this.totalMedia[index];
+
+    this.lightboxMedia.innerHTML = "";
+
+    if (media.image) {
+      const img = document.createElement("img");
+      img.src = `assets/photographers/Sample Photos/${photographer.name}-${photographer.id}/${media.image}`;
+      this.lightboxMedia.appendChild(img);
+    } else if (media.video) {
+      const video = document.createElement("video");
+      video.src = `assets/photographers/Sample Photos/${photographer.name}-${photographer.id}/${media.video}`;
+      video.controls = true;
+      this.lightboxMedia.appendChild(video);
+    }
+
+    this.lightboxTitle.textContent = media.title;
+    this.lightbox.style.display = "block";
+  }
+
+  showNextMedia() {
+    if (this.currentMediaIndex < this.totalMedia.length - 1) {
+      this.currentMediaIndex++;
+      this.openLightbox(this.currentMediaIndex, this.photographer);
+    }
+  }
+
+  showPreviousMedia() {
+    if (this.currentMediaIndex > 0) {
+      this.currentMediaIndex--;
+      this.openLightbox(this.currentMediaIndex, this.photographer);
+    }
+  }
+
+  closeLightbox() {
+    this.lightbox.style.display = "none";
+  }
 }
 
-// Instanciez la classe DetailPhotographerView
 const detailPhotographerView = new DetailPhotographerView();
 
-// Gestionnaire d'événement pour le bouton de tri principal
 const toggleDropdownButton = document.getElementById("toggleDropdown");
 const dropdownContent = document.getElementById("dropdownContent");
 const chevron = document.querySelector(".chevron");
@@ -147,17 +189,17 @@ toggleDropdownButton.addEventListener("click", () => {
   }
 });
 
-// Gestionnaires d'événement pour les options de tri
 const sortByTitle = document.getElementById("sortByTitle");
 sortByTitle.addEventListener("click", () => {
-  // Tri par titre
   detailPhotographerView.sortMediaByTitle();
-  toggleDropdown();
 });
 
 const sortByDate = document.getElementById("sortByDate");
 sortByDate.addEventListener("click", () => {
-  // Tri par date
   detailPhotographerView.sortMediaByDate();
-  toggleDropdown();
-})
+});
+
+const closeButton = document.querySelector(".close-btn");
+closeButton.addEventListener("click", () => {
+  detailPhotographerView.closeLightbox();
+});
