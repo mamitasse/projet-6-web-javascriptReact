@@ -32,11 +32,16 @@ class DetailPhotographerView {
         <p>${photographer.city}, ${photographer.country}</p>
         <p>${photographer.tagline}</p>
       </div>
-      <button class="contact_button" onclick="displayModal()">Contactez-moi</button>
+      <button class="contact_button" onclick="displayModal()">Contactez-moi </button>
       <div class="photographer-photo">
         <img src="assets/photographers/Sample Photos/Photographers ID Photos/${photographer.portrait}" alt="${photographer.name}" />
       </div>
+      
     `;
+    const titreModal=document.querySelector(".titreModal");
+    titreModal.innerHTML=`Contactez-moi <br>${photographer.name}`;
+    console.log(photographer.name);
+
 
     const mediaContainer = document.getElementById("catalogue");
     mediaContainer.innerHTML = "";
@@ -121,7 +126,9 @@ class DetailPhotographerView {
     mediaElements.forEach((mediaElement) => {
       mediaContainer.appendChild(mediaElement);
     });
+  
   }
+
 
   setupMediaEventHandlers() {
     const mediaElements = document.querySelectorAll("#catalogue .media img, #catalogue .media video");
@@ -171,7 +178,9 @@ class DetailPhotographerView {
   closeLightbox() {
     this.lightbox.style.display = "none";
   }
+ 
 }
+
 
 const detailPhotographerView = new DetailPhotographerView();
 

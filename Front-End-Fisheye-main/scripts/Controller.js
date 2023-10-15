@@ -33,6 +33,8 @@ class Controller {
       detailPhotographerView.displayPhotographerDetails(photographer, totalMedia);
   
      
-      }; // Récupération de l'id du photographe dans l'url.
+      }; 
+   
+      
     }
  

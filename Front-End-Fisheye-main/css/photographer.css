@@ -1,5 +1,18 @@
 #contact_modal {
+  padding: 300px;
   display: none;
+  position: fixed;
+  z-index: 1;
+  left: 0;
+  top: 0;
+  height: 98%;
+  width: 70%;
+  overflow: hidden;
+  top: 50%;
+  left: 50%;
+  z-index: 1000;
+  transform: translate(-50%, -50%);
+  background-color: #fff;
 }
 
 .photograph-header {
@@ -74,18 +87,30 @@
   background-color: #901c1c;
   border-radius: 5px;
   cursor: pointer;
+  margin-bottom: 30px;
 }
 
 .modal {
+  margin-top: 40px;
   border-radius: 5px;
   background-color: #db8876;
-  width: 50%;
+
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: space-between;
-  padding: 35px;
+
+  margin-left: auto;
+  margin-right: auto;
   margin: auto;
+
+  padding: 20px;
+  border-radius: 5px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+  position: relative;
+  max-height: 910%; /* La hauteur maximale est de 90% de la hauteur de l'écran */
+  overflow: hidden;
+  width: 50%;
 }
 
 .modal header {
@@ -100,7 +125,9 @@
 .modal header h2 {
   font-size: 64px;
   font-weight: normal;
-  text-align: center;
+  text-align: left;
+  margin-top: 0;
+  margin-bottom: 0;
 }
 
 form {
@@ -108,6 +135,7 @@ form {
   width: 100%;
   flex-direction: column;
   align-items: flex-start;
+  max-height: 90vh;
 }
 
 form label {
@@ -120,19 +148,18 @@ form div {
   flex-direction: column;
   width: 100%;
   align-items: self-start;
-  margin-bottom: 26px;
+  margin-bottom: 3%;
 }
 
 form input {
   width: 100%;
-  height: 68px;
+  height: 50px;
   border: none;
   border-radius: 5px;
 }
 main {
   display: flex;
   flex-direction: column;
- 
 }
 .media img {
   width: 97%;
@@ -186,12 +213,11 @@ header img {
 }
 #select {
   margin-top: 20px;
- 
 }
 
 .dropdown button {
   height: 50px;
- 
+
   background-color: #901c1c;
 
   color: white;
@@ -202,9 +228,9 @@ header img {
   height: 180px;
   width: 170px;
   border-radius: 5px;
-  gap:0px;
+  gap: 0px;
 }
- #select.active{
+#select.active {
   background-color: #901c1c;
 }
 
@@ -216,8 +242,7 @@ header img {
 .dropdown-content button {
   width: 170px;
 }
-#orderSelect option ::after {
-}
+
 .media p span img {
   height: 24px;
   width: 24px;
@@ -239,29 +264,26 @@ header img {
   align-items: end;
   flex-direction: row;
 }
-.trait{
-  width:50px;
-height: 1px;
-flex-shrink: 0;
-background-color: white;
-width: 130px;
+.trait {
+  width: 50px;
+  height: 1px;
+  flex-shrink: 0;
+  background-color: white;
+  width: 130px;
 }
-
 
 .rotate {
   transform: rotate(180deg);
   transition: transform 0.2s ease; /* Animation de la rotation */
 }
-.tri{
+.tri {
   display: flex;
   flex-direction: row;
-  gap: 20px
-  ;
+  gap: 20px;
 }
-body{
+body {
   margin-left: 25px;
 }
-
 
 .chevron {
   font-size: 12px;
@@ -277,30 +299,29 @@ body{
   left: 30px;
   width: 100%;
   height: 100%;
-  background:#fff;
+  background: #fff;
   z-index: 999;
   display: flex;
   align-items: center;
   justify-content: center;
-  
 }
 
 .lightbox__content {
   position: relative;
-width: 90%;
+  width: 90%;
   height: 90%;
   background: #fff;
-  border: 2px solid #95FFF9;
+  border: 2px solid #95fff9;
   margin: 0px;
   margin-top: 30px;
   margin-left: 50px;
-  
+
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
   overflow: hidden;
 }
-.fa-solid, .fas{
+.fa-solid,
+.fas {
   color: rgba(144, 28, 28, 1);
-
 }
 .lightbox__previous,
 .lightbox__next {
@@ -310,17 +331,16 @@ width: 90%;
   color: rgba(144, 28, 28, 1);
   text-align: center;
   line-height: 100%;
- 
+
   font-size: 50px;
   display: flex;
   align-items: center;
   justify-content: center;
   top: 50%; /* Centre verticalement */
   transform: translateY(-50%); /* Centre verticalement */
- 
+
   padding: 0;
   border: #fff;
-
 }
 
 .lightbox__previous {
@@ -338,15 +358,14 @@ width: 90%;
   flex-direction: row;
   justify-content: center;
   align-items: center;
- width: 95%;
-  height:95%;
-  
- 
+  width: 95%;
+  height: 95%;
 }
-.lightbox__media img,.lightbox__media video{
-  width:95%;
+.lightbox__media img,
+.lightbox__media video {
+  width: 95%;
   height: 90%;
-margin-left: 36px;
+  margin-left: 36px;
   overflow: hidden;
   object-fit: cover;
 
@@ -365,15 +384,26 @@ margin-left: 36px;
   padding: 0;
   border: #fff;
 }
-.lightbox__title{
-  color: #901C1C;
-font-family: DM Sans;
-font-size: 24px;
-font-style: normal;
-font-weight: 400;
-line-height: normal;
-margin-left: 60px;
-margin-bottom: 60px;
-margin-top: 0px;
-padding: 0;
+.lightbox__title {
+  color: #901c1c;
+  font-family: DM Sans;
+  font-size: 24px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: normal;
+  margin-left: 60px;
+  margin-bottom: 60px;
+  margin-top: 0px;
+  padding: 0;
+}
+.modal header img {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  font-size: 200px;
+  cursor: pointer;
+}
+#message {
+  width: 100%;
+  height: 170px;
 }

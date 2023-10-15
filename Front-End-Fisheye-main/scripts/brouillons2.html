@@ -1,0 +1,136 @@
+<main id="main">
+      <div class="photograph-header">
+        <button
+          class="contact_button"
+          onclick="displayModal()"
+          aria-label="Ouvrir la boîte de dialogue de contact"
+        >
+          Contactez-moi
+        </button>
+        
+      </div>
+
+      <div class="tri"aria-label="selection">
+        <p>trier par</p>
+        <div  id="select" class="dropdown"  role="menu">
+          <button
+            class="dropdown-button"
+            id="toggleDropdown"
+            aria-haspopup="true"
+            aria-expanded="false"
+          >
+            Popularité
+            <i class="fa fa-chevron-down chevron" aria-hidden="true"></i>
+          </button>
+          <div
+            class="dropdown-content"
+            id="dropdownContent"
+            aria-label="Menu de tri"
+          >
+            <button id="sortByTitle" role="menuitem">Trier par Titre</button>
+            <div class="trait"></div>
+            <button id="sortByDate" role="menuitem">Trier par Date</button>
+          </div>
+        </div>
+      </div>
+      <div id="catalogue"></div>
+      <div
+      id="contact_modal"
+      role="dialog"
+      aria-modal="true"
+      aria-labelledby="modal-title"
+      aria-describedby="modal-description"
+    >
+      <div class="modal">
+        <header>
+          <h2 id="modal-title">
+            Contactez-moi <span id="photographer-name">Nom du photographe</span>
+          </h2>
+          <img
+            src="assets/icons/close.svg"
+            onclick="closeModal()"
+            aria-label="Fermer la boîte de dialogue"
+            role="button"
+            tabindex="0"
+          />
+        </header>
+        <form id="contact-form" onsubmit="submitForm(event)">
+          <div>
+            <label for="prenom" id="prenom-label">Prénom</label>
+            <input
+              type="text"
+              id="prenom"
+              name="prenom"
+              aria-labelledby="modal-title prenom-label"
+              required
+            />
+          </div>
+          <div>
+            <label for="nom" id="nom-label">Nom</label>
+            <input
+              type="text"
+              id="nom"
+              name="nom"
+              aria-labelledby="modal-title nom-label"
+              required
+            />
+          </div>
+          <div>
+            <label for="email" id="email-label">Email</label>
+            <input
+              type="email"
+              id="email"
+              name="email"
+              aria-labelledby="modal-title email-label"
+              required
+            />
+          </div>
+          <div>
+            <label for="message" id="message-label">Message</label>
+            <textarea
+              id="message"
+              name="message"
+              aria-labelledby="modal-title message-label"
+              required
+            ></textarea>
+          </div>
+          <button
+            class="contact_button"
+            type="submit"
+            aria-label="Envoyer le message"
+          >
+            Envoyer
+          </button>
+        </form>
+        <div id="thank-you-message" style="display: none;">
+          <p>Merci pour votre message !</p>
+        </div>
+      </div>
+    </div>
+    </main>
+    
+    <div id="lightbox">
+      <div class="lightbox__content" aria-label="image closeup view">
+        <button class="close-btn" role="button" aria-label="Close Dialog">
+          X
+        </button>
+        <a
+          class="lightbox__previous"
+          role="button"
+          aria-label="previous image"
+          tabindex="0"
+        >
+          <i class="fa-solid fa-chevron-left" tabindex="0"></i>
+        </a>
+        <div class="lightbox__media"></div>
+        <a
+          class="lightbox__next"
+          role="button"
+          aria-label="Next image"
+          tabindex="0"
+        >
+          <i class="fa-solid fa-chevron-right" tabindex="0"></i>
+        </a>
+      </div>
+      <p class="lightbox__title"></p>
+    </div>
