@@ -1,3 +1,6 @@
+html{
+  max-width: 1440px;
+}
 #contact_modal {
   padding: 300px;
   display: none;
@@ -21,7 +24,7 @@
   display: flex;
   justify-content: space-around;
   align-items: center;
-  gap: 2%;
+   
 }
 @media screen and (max-width: 700px) {
   .photograph-header {
@@ -91,7 +94,7 @@
 }
 
 .modal {
-  margin-top: 40px;
+  margin-top: 30px;
   border-radius: 5px;
   background-color: #db8876;
 
@@ -108,14 +111,15 @@
   border-radius: 5px;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
   position: relative;
-  max-height: 910%; /* La hauteur maximale est de 90% de la hauteur de l'écran */
+  max-height: 90%; /* La hauteur maximale est de 90% de la hauteur de l'écran */
   overflow: hidden;
-  width: 50%;
+  width: 70%;
 }
 
 .modal header {
   justify-content: space-between;
   width: 100%;
+  height: 10%;
 }
 
 .modal header img {
@@ -160,15 +164,17 @@ form input {
 main {
   display: flex;
   flex-direction: column;
+
+ 
 }
 .media img {
-  width: 97%;
+  width: 350px;
   height: 300px;
   object-fit: cover;
   border-radius: 5px;
 }
 .media video {
-  width: 97%;
+  width: 350px;
   height: 300px;
   object-fit: cover;
   border-radius: 5px;
@@ -191,6 +197,8 @@ main {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
   gap: 10px;
+  align-items: center;
+  margin: auto;
 }
 @media screen and (max-width: 1000px) {
   #catalogue {
@@ -209,7 +217,7 @@ header img {
   margin-left: 0px;
   margin-bottom: 30px;
   margin-top: 2%;
-  margin-left: 5%;
+ 
 }
 #select {
   margin-top: 20px;
@@ -237,6 +245,7 @@ header img {
 .dropdown-content {
   display: flex;
   flex-direction: column;
+ 
   gap: 0px;
 }
 .dropdown-content button {
@@ -277,12 +286,20 @@ header img {
   transition: transform 0.2s ease; /* Animation de la rotation */
 }
 .tri {
+  position: relative;
   display: flex;
   flex-direction: row;
   gap: 20px;
+margin-left:40px;
+color: #000;
+font-family: DM Sans;
+font-size: 18px;
+font-style: normal;
+font-weight: 700;
+line-height: normal;
 }
 body {
-  margin-left: 25px;
+  margin-left: 50px;
 }
 
 .chevron {
@@ -406,4 +423,18 @@ body {
 #message {
   width: 100%;
   height: 170px;
+}
+header .logo{
+  margin-left: 0px;
+}
+body header{
+  margin-left: 0;
+}
+.info{
+  display: flex;
+  justify-content: space-between;
+width: 350px;
+}
+#catalogue{
+  margin-top: -150px;
 }
