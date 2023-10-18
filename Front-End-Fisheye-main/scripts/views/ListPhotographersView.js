@@ -17,8 +17,8 @@ class ListPhotographersView {
                 </a>
             <h2>${photographer.name}</h2>
             <p class="infoVille">${photographer.city}, ${photographer.country}</p>
-            <p class="info">${photographer.tagline}</p>
-            <p class="info"> ${photographer.price}€/jour</p>
+            <p class="infoDoc">${photographer.tagline}</p>
+            <p class="infoPrix"> ${photographer.price}€/jour</p>
         `;
         photographerElement.querySelector("a").addEventListener("click", (e) => {
             e.preventDefault(); // Empêche le lien de naviguer vers la page

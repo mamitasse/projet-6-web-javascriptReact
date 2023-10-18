@@ -13,9 +13,11 @@ class DetailPhotographerView {
     this.previousButton = document.querySelector(".lightbox__previous");
     this.closeButton = document.querySelector(".close-btn");
 
+    this.manageDropdown();
+
     // Gestion de la touche "Escape" pour fermer la lightbox
-    document.addEventListener('keydown', (e) => {
-      if (e.key === 'Escape') this.closeLightbox();
+    document.addEventListener("keydown", (e) => {
+      if (e.key === "Escape") this.closeLightbox();
     });
 
     // Écouteurs d'événements pour les boutons Next et Previous
@@ -28,9 +30,15 @@ class DetailPhotographerView {
     });
 
     // Écouteurs d'événements pour la navigation à l'aide des touches de clavier (flèches gauche/droite)
-    document.addEventListener('keydown', (e) => {
-      if (e.key === 'ArrowLeft') this.showPreviousMedia();
-      if (e.key === 'ArrowRight') this.showNextMedia();
+    document.addEventListener("keydown", (e) => {
+      if (e.key === "ArrowLeft") this.showPreviousMedia();
+      if (e.key === "ArrowRight") this.showNextMedia();
+    });
+
+    // Gestion du bouton de fermeture de la lightbox
+    const closeButton = document.querySelector(".close-btn");
+    closeButton.addEventListener("click", () => {
+      this.closeLightbox();
     });
 
     // Appel à la fonction pour configurer les gestionnaires d'événements des médias
@@ -46,12 +54,12 @@ class DetailPhotographerView {
     const photographerHeader = document.querySelector(".photograph-header");
     photographerHeader.innerHTML = `
       <div class="photographer-info">
-        <h1>${photographer.name}</h1>
-        <p>${photographer.city}, ${photographer.country}</p>
-        <p>${photographer.tagline}</p>
+        <h1 tabindex="2">${photographer.name}</h1>
+        <p tabindex="3">${photographer.city}, ${photographer.country}</p>
+        <p tabindex="4">${photographer.tagline}</p>
       </div>
-      <button class="contact_button" onclick="displayModal()">Contactez-moi </button>
-      <div class="photographer-photo">
+      <button tabindex="5" class="contact_button" onclick="displayModal()">Contactez-moi </button>
+      <div class="photographer-photo" tabindex="6">
         <img src="assets/photographers/Sample Photos/Photographers ID Photos/${photographer.portrait}" alt="${photographer.name}" />
       </div>
     `;
@@ -71,36 +79,33 @@ class DetailPhotographerView {
       mediaElement.setAttribute("data-date", media.date);
       mediaElement.setAttribute("data-title", media.title);
 
-      if (media.image) {
-        mediaElement.innerHTML = `
-          <img src="assets/photographers/Sample Photos/${photographer.name}-${photographer.id}/${media.image}" alt="${media.title}" />
-          <div class="info">
-            <p>${media.title}</p>
-            <p class="likes" id="likes">${media.likes} <span><img src="assets/icons/coeur.svg" alt="coeur"></span></p>
-          </div>
-        `;
-
-        // Ajout d'un gestionnaire d'événements pour ouvrir la lightbox lors du clic
-        mediaElement.addEventListener("click", () => {
-          this.openLightbox(index, photographer);
-        });
-      } else if (media.video) {
-        mediaElement.innerHTML = `
-          <video src="assets/photographers/Sample Photos/${photographer.name}-${photographer.id}/${media.video}" controls autoplay></video>
-          <div class "info">
-            <p>${media.title}</p>
-            <p class="likes" id="likes">${media.likes} <span><img src="assets/icons/coeur.svg" alt="coeur"></span></p>
-          </div>
-        `;
-
-        // Ajout d'un gestionnaire d'événements pour ouvrir la lightbox lors du clic
-        mediaElement.addEventListener("click", () => {
-          this.openLightbox(index, photographer);
-        });
-      }
-
+      mediaElement.innerHTML = this.htmlMediaFactory(photographer, media);
+      // Ajout d'un gestionnaire d'événements pour ouvrir la lightbox lors du clic
+      mediaElement.addEventListener("click", () => {
+        this.openLightbox(index, photographer);
+      });
       mediaContainer.appendChild(mediaElement);
     });
+  }
+
+  htmlMediaFactory(photographer, media) {
+    if (media.image) {
+      return `
+        <img src="assets/photographers/Sample Photos/${photographer.name}-${photographer.id}/${media.image}" alt="${media.title}" tabindex="8"/>
+        <div class="info">
+          <p>${media.title}</p>
+          <p class="likes" id="likes">${media.likes} <span><img src="assets/icons/coeur.svg" alt="coeur"></span></p>
+        </div>
+      `;
+    } else if (media.video) {
+      return `
+        <video src="assets/photographers/Sample Photos/${photographer.name}-${photographer.id}/${media.video}" controls autoplay tabindex="8"></video>
+        <div class "info">
+          <p>${media.title}</p>
+          <p class="likes" id="likes">${media.likes} <span><img src="assets/icons/coeur.svg" alt="coeur"></span></p>
+        </div>
+      `;
+    }
   }
 
   // Cette méthode trie les médias par popularité (likes)
@@ -151,19 +156,54 @@ class DetailPhotographerView {
     });
   }
 
+  manageDropdown() {
+    // Gestion du bouton pour afficher/masquer la liste de tri
+    const toggleDropdownButton = document.getElementById("toggleDropdown");
+    const dropdownContent = document.getElementById("dropdownContent");
+    const chevron = document.querySelector(".chevron");
+
+    toggleDropdownButton.addEventListener("click", () => {
+      if (dropdownContent.style.display === "block") {
+        dropdownContent.style.display = "none";
+        chevron.classList.remove("rotate");
+      } else {
+        dropdownContent.style.display = "block";
+        chevron.classList.add("rotate");
+      }
+    });
+
+    // Gestion des boutons de tri
+    const sortByTitle = document.getElementById("sortByTitle");
+    sortByTitle.addEventListener("click", () => {
+      this.sortMediaByTitle();
+    });
+
+    const sortByDate = document.getElementById("sortByDate");
+    sortByDate.addEventListener("click", () => {
+      this.sortMediaByDate();
+    });
+
+    const sortByPopularity = document.getElementById("toggleDropdown");
+    sortByPopularity.addEventListener("click", () => {
+      this.sortMediaByPopularity();
+    });
+  }
+
   // Configuration des gestionnaires d'événements pour les médias
   setupMediaEventHandlers() {
-    const mediaElements = document.querySelectorAll("#catalogue .media img, #catalogue .media video");
+    const mediaElements = document.querySelectorAll(
+      "#catalogue .media img, #catalogue .media video"
+    );
 
     mediaElements.forEach((media, index) => {
       media.addEventListener("click", (e) => {
         // Empêche l'ouverture de la lightbox au clic
         e.stopPropagation();
         e.preventDefault();
-        
+
         // Affiche la lightbox uniquement si la touche "Entrée" est pressée
         media.addEventListener("keydown", (e) => {
-          if (e.key === 'Enter') {
+          if (e.key === "Enter") {
             this.openLightbox(index, this.photographer);
           }
         });
@@ -214,49 +254,3 @@ class DetailPhotographerView {
     this.lightbox.style.display = "none";
   }
 }
-
-// Création d'une instance de DetailPhotographerView
-const detailPhotographerView = new DetailPhotographerView();
-
-// Gestion du bouton pour afficher/masquer la liste de tri
-const toggleDropdownButton = document.getElementById("toggleDropdown");
-const dropdownContent = document.getElementById("dropdownContent");
-const chevron = document.querySelector(".chevron");
-
-toggleDropdownButton.addEventListener("click", () => {
-  if (dropdownContent.style.display === "block") {
-    dropdownContent.style.display = "none";
-    chevron.classList.remove("rotate");
-  } else {
-    dropdownContent.style.display = "block";
-    chevron.classList.add("rotate");
-  }
-});
-
-// Gestion des boutons de tri
-const sortByTitle = document.getElementById("sortByTitle");
-sortByTitle.addEventListener("click", () => {
-  detailPhotographerView.sortMediaByTitle();
-});
-
-const sortByDate = document.getElementById("sortByDate");
-sortByDate.addEventListener("click", () => {
-  detailPhotographerView.sortMediaByDate();
-});
-
-// Gestion du bouton de fermeture de la lightbox
-const closeButton = document.querySelector(".close-btn");
-closeButton.addEventListener("click", () => {
-  detailPhotographerView.closeLightbox();
-});
-
-// Autres gestionnaires d'événements (par exemple, pour la navigation à l'aide des touches de clavier)
-document.addEventListener('keydown', (e) => {
-  if (e.key === 'ArrowLeft') {
-    detailPhotographerView.showPreviousMedia();
-
-  } else if (e.key === 'ArrowRight') {
-    detailPhotographerView.showNextMedia();
-    
-  }
-});

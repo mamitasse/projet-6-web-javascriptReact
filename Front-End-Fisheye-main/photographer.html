@@ -16,36 +16,37 @@
   </head>
   <body>
     <header>
-      <a href="index.html" class="logo">
-        <img src="assets/images/logo.png" alt="fisheye logo" />
+      <a href="index.html" class="logo" >
+        <img src="assets/images/logo.png" alt="fisheye logo" tabindex="1"/>
       </a>
     </header>
     <main id="main">
       <div class="photograph-header">
-        <button class="contact_button" onclick="displayModal()">
+        <button tabindex="5" class="contact_button" onclick="displayModal()">
           Contactez-moi
         </button>
       </div>
-      <div class="tri">
-      <p>Trier par</p>
+      <div class="tri" tabindex="7">
+      <p class="trierPar">Trier par</p>
       <div id="select" class="dropdown">
-        <button class="dropdown-button" id="toggleDropdown">
+        <button class="dropdown-button" id="toggleDropdown" tabindex="7">
           Popularité <i class="fa fa-chevron-down  chevron"></i>
         </button>
-        <div class="dropdown-content" id="dropdownContent" style="display: none;">
-          <button id="sortByTitle">Titre</button>
-          <div class="trait">  </div>
-          <button id="sortByDate">Date</button>
+        <div class="trait">  </div>
+        <div class="dropdown-content" id="dropdownContent" tabindex="7" >
+          <button id="sortByTitle" tabindex="7" >Titre</button>
+          <div class="trait traitTitre trait Titre">  </div>
+          <button id="sortByDate" tabindex="7" >Date</button>
         </div>
       </div>
     </div>
-      <div id="catalogue"></div>
+      <div id="catalogue" tabindex="8"></div>
     </main>
-    <div id="contact_modal">
+    <div id="contact_modal" tabindex="5">
       <div class="modal">
         <header>
-          <h2 class="titreModal">Contactez-moi</h2>
-          <img src="assets/icons/close.svg" onclick="closeModal()" />
+          <h2 class="titreModal" tabindex="5" >Contactez-moi</h2>
+          <img src="assets/icons/close.svg" onclick="closeModal()" alt="fermer la modal" tabindex="5"/>
           
         </header>
         <form>
@@ -56,6 +57,7 @@
               id="prenom"
               name="prenom"
               aria-labelledby="modal-title prenom-label"
+              tabindex="5"
               required
             />
           </div>
@@ -66,6 +68,7 @@
               id="nom"
               name="nom"
               aria-labelledby="modal-title nom-label"
+              tabindex="5"
               required
             />
           </div>
@@ -76,6 +79,7 @@
               id="email"
               name="email"
               aria-labelledby="modal-title email-label"
+              tabindex="5"
               required
             />
           </div>
@@ -85,6 +89,7 @@
               id="message"
               name="message"
               aria-labelledby="modal-title message-label"
+              tabindex="5"
               required
             ></textarea>
           </div>
@@ -92,6 +97,7 @@
             class="contact_button envoyer"
             type="submit"
             aria-label="Envoyer le message"
+            tabindex="5"
           >
             Envoyer
           </button>
@@ -99,7 +105,7 @@
         </form>
       </div>
     </div>
-    <div id="lightbox" style="display: none;">
+    <div id="lightbox">
       <div class="lightbox__content" aria-label="image closeup view">
         <button class="close-btn" role="button" aria-label="Fermer la lightbox">X</button>
         <a class="lightbox__previous" role="button" aria-label="Image précédente" tabindex="0">

@@ -1,96 +1,108 @@
-@import url("photographer.css");
-html{
-    max-width: 1440px;
-}
-body {
-    font-family: "DM Sans", sans-serif;
-    margin: 0;
-}
 
+
+body {
+  font-family: "DM Sans", sans-serif;
+  margin: 0;
+}
 
 header {
-    display: flex;
-    flex-direction: row;
-    justify-content: space-between;
-    align-items: center;
-    height: 90px;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+
+  height: 90px;
+  margin-top: 42px;
+  margin-left: 102px;
 }
 
 h1 {
-    color: #901C1C;
-    margin-right: 100px;
+  color: #901c1c;
+  margin-right: 100px;
 }
 
-header img{
-    height: 50px;
-    margin-left: 100px;
+header img {
+  height: 50px;
+  margin-left: 100px;
 }
 
 .photographer_section {
-    display: grid;
-    grid-template-columns: 1fr 1fr 1fr;
-    gap: 70px;
-    margin-top: 100px;
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  gap: 70px;
+  margin-top: 100px;
 }
 
 .photographer_section article {
-    justify-self: center;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    flex-direction: column;
-    gap: 0px;
+  justify-self: center;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  gap: 0px;
 }
 
 .photographer_section article h2 {
-    color: #D3573C;
-    font-size: 36px;
+  color: #d3573c;
+  font-size: 36px;
 }
 
 .photographer_section article img {
-    height: 200px;
-    width: 200px;
-    border-radius: 50%; 
-    margin-bottom: 0px;
-    object-fit: cover; /* Empêche la déformation en ajustant l'image pour couvrir le conteneur */
-    object-position: center center;
+  height: 200px;
+  width: 200px;
+  border-radius: 50%;
+  margin-bottom: 0px;
+  object-fit: cover; /* Empêche la déformation en ajustant l'image pour couvrir le conteneur */
+  object-position: center center;
 }
 
-.photographer_section article h2{
-    color: #D3573C;
-text-align: center;
-font-family: DM Sans;
-font-size: 36px;
-font-style: normal;
-font-weight: 400;
-line-height: normal;
-margin-top: 0px;
-margin-bottom: 0px;
+.photographer_section article h2 {
+  color: #d3573c;
+  text-align: center;
+  font-family: DM Sans;
+  font-size: 36px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: normal;
+  margin-top: 0px;
+  margin-bottom: 0px;
 }
 
 /* Réduit l'espace entre les paragraphes avec la classe "info" */
 .photographer_section article .infoVille {
-    margin-bottom: 10px; /* Ajustez cette valeur selon l'espace souhaité */
-    color: #901C1C;
-text-align: center;
-font-family: DM Sans;
-font-size: 13px;
-font-style: normal;
-font-weight: 400;
-line-height: normal;
-margin-bottom: 0px;
-margin-top: 0px;
-padding-top: 0px;
-  }
-  .info{
-    color: #000;
-text-align: center;
-font-family: DM Sans;
-font-size: 10px;
-font-style: normal;
-font-weight: 400;
-line-height: normal;
-margin-bottom: 0px;
-margin-top: 0px;
+  color: #901c1c;
+  text-align: center;
+  font-family: DM Sans;
+  font-size: 13px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: normal;
 }
-main{margin: 0px;}
+.photographer_section article .infoDoc {
+  color: #901c1c;
+  text-align: center;
+  font-family: DM Sans;
+  font-size: 13px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: normal;
+}
+
+.photographer_section article .infoPrix {
+  color: #757575;
+  text-align: center;
+  font-family: DM Sans;
+  font-size: 9px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: normal;
+}
+
+.info {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+main {
+  margin: 0px;
+}
