@@ -48,4 +48,6 @@ class Model {
         );
         return photographer;
     }
+
+    
   }

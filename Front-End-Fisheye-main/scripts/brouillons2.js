@@ -36,21 +36,18 @@ class DetailPhotographerView {
       if (e.key === "ArrowRight") this.showNextMedia();
     });
 
+    
+
     // Gestion du bouton de fermeture de la lightbox
     this.closeButton.addEventListener("click", () => {
       this.closeLightbox();
     });
 
-
-
     // Appel à la fonction pour configurer les gestionnaires d'événements des médias
     this.setupMediaEventHandlers();
   }
 
-   // Cette méthode affiche les détails du photographe et sa galerie de médias
-   displayPhotographerDetails(photographer, totalMedia) {
-    this.totalMedia = totalMedia;
-    this.photographer = photographer;
+  // ...
 
   // Cette méthode affiche les détails du photographe et sa galerie de médias
   displayPhotographerDetails(photographer, totalMedia) {
@@ -166,6 +163,8 @@ openLightboxForMedia(index, photographer) {
     const videoMediaElements = document.querySelectorAll(".video-media video");
   
     photoMediaElements.forEach((photoMedia, index) => {
+
+      
        // Récupérez le bouton "J'aime" du média
     const likeButton = mediaElement.querySelector(".like-button");
 
@@ -183,6 +182,7 @@ openLightboxForMedia(index, photographer) {
           this.openLightboxForMedia(index, this.photographer); // Utilisez openLightboxForMedia
         }
       });
+      
     });
   
     videoMediaElements.forEach((videoMedia, index) => {
@@ -199,6 +199,8 @@ openLightboxForMedia(index, photographer) {
     });
   }
   handleLikeClick(index, likeButton) {
+
+    
     // Récupérez le média actuel
     const media = this.totalMedia[index];
   
@@ -209,6 +211,8 @@ openLightboxForMedia(index, photographer) {
     const likesCount = likeButton.previousElementSibling; // Le compteur de likes précède le bouton "J'aime"
     likesCount.textContent = media.likes;
   }
+
+  
   // Cette méthode trie les médias par popularité (likes)
   sortMediaByPopularity() {
     const mediaContainer = document.getElementById("catalogue");
@@ -290,37 +294,7 @@ openLightboxForMedia(index, photographer) {
     });
   }
 
-  // Modification de la méthode setupMediaEventHandlers
-  setupMediaEventHandlers() {
-    const photoMediaElements = document.querySelectorAll(".photo-media img");
-    const videoMediaElements = document.querySelectorAll(".video-media video");
 
-    photoMediaElements.forEach((photoMedia, index) => {
-      photoMedia.addEventListener("click", () => {
-        this.openLightbox(index, this.photographer);
-      });
-
-      // Affiche la lightbox uniquement si la touche "Entrée" est pressée
-      photoMedia.addEventListener("keydown", (e) => {
-        if (e.key === "Enter") {
-          this.openLightbox(index, this.photographer);
-        }
-      });
-    });
-
-    videoMediaElements.forEach((videoMedia, index) => {
-      videoMedia.addEventListener("click", () => {
-        this.openLightbox(index, this.photographer);
-      });
-
-      // Affiche la lightbox uniquement si la touche "Entrée" est pressée
-      videoMedia.addEventListener("keydown", (e) => {
-        if (e.key === "Enter") {
-          this.openLightbox(index, this.photographer);
-        }
-      });
-    });
-  }
 
  
 
@@ -328,7 +302,7 @@ openLightboxForMedia(index, photographer) {
   showNextMedia() {
     if (this.currentMediaIndex < this.totalMedia.length - 1) {
       this.currentMediaIndex++;
-      this.openLightbox(this.currentMediaIndex, this.photographer);
+      this.openLightboxForMedia(this.currentMediaIndex, this.photographer);
     }
   }
 
@@ -336,7 +310,7 @@ openLightboxForMedia(index, photographer) {
   showPreviousMedia() {
     if (this.currentMediaIndex > 0) {
       this.currentMediaIndex--;
-      this.openLightbox(this.currentMediaIndex, this.photographer);
+      this.openLightboxForMedia(this.currentMediaIndex, this.photographer);
     }
   }
 
@@ -345,5 +319,4 @@ openLightboxForMedia(index, photographer) {
     this.lightbox.style.display = "none";
   }
 
-}
 }

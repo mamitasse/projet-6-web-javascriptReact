@@ -7,11 +7,14 @@ class DetailPhotographerView {
     this.lightbox = document.getElementById("lightbox");
     this.lightboxMedia = document.querySelector(".lightbox__media");
     this.lightboxTitle = document.querySelector(".lightbox__title");
-
+    this.likes = [];
     // Sélectionnez les boutons Next, Previous et Close pour ajouter des écouteurs d'événements
     this.nextButton = document.querySelector(".lightbox__next");
     this.previousButton = document.querySelector(".lightbox__previous");
     this.closeButton = document.querySelector(".close-btn");
+    this.likeButtons = document.querySelectorAll(".heart-button");
+
+
 
     this.manageDropdown();
 
@@ -35,15 +38,18 @@ class DetailPhotographerView {
       if (e.key === "ArrowRight") this.showNextMedia();
     });
 
+    
+
     // Gestion du bouton de fermeture de la lightbox
-    const closeButton = document.querySelector(".close-btn");
-    closeButton.addEventListener("click", () => {
+    this.closeButton.addEventListener("click", () => {
       this.closeLightbox();
     });
 
     // Appel à la fonction pour configurer les gestionnaires d'événements des médias
     this.setupMediaEventHandlers();
   }
+
+ 
 
   // Cette méthode affiche les détails du photographe et sa galerie de médias
   displayPhotographerDetails(photographer, totalMedia) {
@@ -68,6 +74,16 @@ class DetailPhotographerView {
     const titreModal = document.querySelector(".titreModal");
     titreModal.innerHTML = `Contactez-moi <br>${photographer.name}`;
 
+    // Calcul du total des likes du photographe
+    const totalLikes = totalMedia.reduce(
+      (total, media) => total + media.likes,
+      0
+    );
+
+    // Affichage du total des likes du photographe
+    const totalLikesElement = document.getElementById("totalLikes");
+    totalLikesElement.innerHTML = `<div> ${totalLikes} <span class="heart">&#x1F5A4;</span></div><div> ${photographer.price}€/jour</div>`;
+
     // Affichage des médias dans la galerie
     const mediaContainer = document.getElementById("catalogue");
     mediaContainer.innerHTML = "";
@@ -79,34 +95,150 @@ class DetailPhotographerView {
       mediaElement.setAttribute("data-date", media.date);
       mediaElement.setAttribute("data-title", media.title);
 
-      mediaElement.innerHTML = this.htmlMediaFactory(photographer, media);
-      // Ajout d'un gestionnaire d'événements pour ouvrir la lightbox lors du clic
+      mediaElement.innerHTML = this.htmlMediaFactory(photographer, media, index);
+
+      // Ajout d'un gestionnaire d'événements pour ouvrir la lightbox lors du clic sur le média
       mediaElement.addEventListener("click", () => {
-        this.openLightbox(index, photographer);
+        this.openLightboxForMedia(index, photographer);
       });
+    
       mediaContainer.appendChild(mediaElement);
+    
+      // Récupérez le bouton "J'aime" de ce média
+      const likeButton = mediaElement.querySelector(".heart-button");
+      
+      // Ajoutez un gestionnaire d'événements pour le bouton "J'aime" pour empêcher la propagation
+      likeButton.addEventListener("click", (event) => {
+        event.stopPropagation();
+      });
     });
   }
 
-  htmlMediaFactory(photographer, media) {
+// Ajoutez cette méthode dans votre classe DetailPhotographerView
+openLightboxForMedia(index, photographer) {
+  this.currentMediaIndex = index;
+  const media = this.totalMedia[index];
+
+  this.lightboxMedia.innerHTML = "";
+
+  if (media.image) {
+    const img = document.createElement("img");
+    img.src = `assets/photographers/Sample Photos/${photographer.name}-${photographer.id}/${media.image}`;
+    this.lightboxMedia.appendChild(img);
+  } else if (media.video) {
+    const video = document.createElement("video");
+    video.src = `assets/photographers/Sample Photos/${photographer.name}-${photographer.id}/${media.video}`;
+    video.controls = true;
+    this.lightboxMedia.appendChild(video);
+  }
+
+  this.lightboxTitle.textContent = media.title;
+  this.lightbox.style.display = "block";
+}
+
+  // Méthode pour générer le code HTML de chaque média en fonction du type (image ou vidéo)
+  htmlMediaFactory(photographer, media, index) {
     if (media.image) {
       return `
-        <img src="assets/photographers/Sample Photos/${photographer.name}-${photographer.id}/${media.image}" alt="${media.title}" tabindex="8"/>
+        <div class="photo-media" tabindex="8">
+          <img src="assets/photographers/Sample Photos/${photographer.name}-${photographer.id}/${media.image}" alt="${media.title}" />
+        </div>
         <div class="info">
           <p>${media.title}</p>
-          <p class="likes" id="likes">${media.likes} <span><img src="assets/icons/coeur.svg" alt="coeur"></span></p>
-        </div>
-      `;
+          <p class="likes" id="likes-${index}">${media.likes} <button class="heart-button liked" data-index><span><img src="assets/icons/coeur.svg" alt="coeur"></span></button></p>
+        `;
     } else if (media.video) {
       return `
-        <video src="assets/photographers/Sample Photos/${photographer.name}-${photographer.id}/${media.video}" controls autoplay tabindex="8"></video>
-        <div class "info">
-          <p>${media.title}</p>
-          <p class="likes" id="likes">${media.likes} <span><img src="assets/icons/coeur.svg" alt="coeur"></span></p>
+        <div class="video-media" tabindex="8">
+          <video src="assets/photographers/Sample Photos/${photographer.name}-${photographer.id}/${media.video}" class="video" controls autoplay></video>
         </div>
-      `;
+        <div class="info">
+          <p>${media.title}</p>
+          <p class="likes" id="likes-${index}">${media.likes} <button class="heart-button liked" data-index><span><img src="assets/icons/coeur.svg" alt="coeur"></span></button></p>
+        `;
     }
   }
+
+
+  setupMediaEventHandlers() {
+    const photoMediaElements = document.querySelectorAll(".photo-media img");
+    const videoMediaElements = document.querySelectorAll(".video-media video");
+  
+    photoMediaElements.forEach((photoMedia, index) => {
+
+      
+       // Récupérez le bouton "J'aime" du média
+    const likeButton = mediaElement.querySelector(".like-button");
+
+    likeButton.addEventListener("click", (event) => {
+      event.stopPropagation(); // Empêche la propagation de l'événement
+      this. handleLikeButtonClick(index, likeButton);
+      console.log("le bouton like est clique")
+    });
+      photoMedia.addEventListener("click", () => {
+        this.openLightboxForMedia(index, this.photographer); // Utilisez openLightboxForMedia
+      });
+  
+      // Affiche la lightbox uniquement si la touche "Entrée" est pressée
+      photoMedia.addEventListener("keydown", (e) => {
+        if (e.key === "Enter") {
+          this.openLightboxForMedia(index, this.photographer); // Utilisez openLightboxForMedia
+        }
+      });
+      
+    });
+  
+    videoMediaElements.forEach((videoMedia, index) => {
+      videoMedia.addEventListener("click", () => {
+        this.openLightboxForMedia(index, this.photographer); // Utilisez openLightboxForMedia
+      });
+  
+      // Affiche la lightbox uniquement si la touche "Entrée" est pressée
+      videoMedia.addEventListener("keydown", (e) => {
+        if (e.key === "Enter") {
+          this.openLightboxForMedia(index, this.photographer); // Utilisez openLightboxForMedia
+        }
+      });
+    });
+  }
+
+ 
+  // Gestion du bouton "J'aime"
+  handleLikeButtonClick(index, likeButton) {
+    const currentLikes = this.likes[index] || 0;
+
+    if (likeButton.classList.contains("liked")) {
+      // Si le média est déjà aimé, diminue le nombre de likes
+      this.decrementLikes(index);
+      likeButton.classList.remove("liked");
+    } else {
+      // Si le média n'est pas encore aimé, augmente le nombre de likes
+      this.incrementLikes(index);
+      likeButton.classList.add("liked");
+    }
+
+    // Mettez à jour l'affichage du nombre de likes
+    this.updateLikesCount(index);
+  }
+
+  // Fonction pour incrémenter le nombre de likes
+  incrementLikes(index) {
+    this.likes[index] = (this.likes[index] || 0) + 1;
+  }
+
+  // Fonction pour décrémenter le nombre de likes
+  decrementLikes(index) {
+    if (this.likes[index] && this.likes[index] > 0) {
+      this.likes[index] -= 1;
+    }
+  }
+
+  // Met à jour l'affichage du nombre de likes
+  updateLikesCount(index) {
+    const likesCountElement = document.getElementById(`likes-${index}`);
+    likesCountElement.textContent = `${this.likes[index] || 0} likes`;
+  }
+
 
   // Cette méthode trie les médias par popularité (likes)
   sortMediaByPopularity() {
@@ -189,55 +321,15 @@ class DetailPhotographerView {
     });
   }
 
-  // Configuration des gestionnaires d'événements pour les médias
-  setupMediaEventHandlers() {
-    const mediaElements = document.querySelectorAll(
-      "#catalogue .media img, #catalogue .media video"
-    );
 
-    mediaElements.forEach((media, index) => {
-      media.addEventListener("click", (e) => {
-        // Empêche l'ouverture de la lightbox au clic
-        e.stopPropagation();
-        e.preventDefault();
 
-        // Affiche la lightbox uniquement si la touche "Entrée" est pressée
-        media.addEventListener("keydown", (e) => {
-          if (e.key === "Enter") {
-            this.openLightbox(index, this.photographer);
-          }
-        });
-      });
-    });
-  }
-
-  // Cette méthode ouvre la lightbox avec le média sélectionné
-  openLightbox(index, photographer) {
-    this.currentMediaIndex = index;
-    const media = this.totalMedia[index];
-
-    this.lightboxMedia.innerHTML = "";
-
-    if (media.image) {
-      const img = document.createElement("img");
-      img.src = `assets/photographers/Sample Photos/${photographer.name}-${photographer.id}/${media.image}`;
-      this.lightboxMedia.appendChild(img);
-    } else if (media.video) {
-      const video = document.createElement("video");
-      video.src = `assets/photographers/Sample Photos/${photographer.name}-${photographer.id}/${media.video}`;
-      video.controls = true;
-      this.lightboxMedia.appendChild(video);
-    }
-
-    this.lightboxTitle.textContent = media.title;
-    this.lightbox.style.display = "block";
-  }
+ 
 
   // Cette méthode affiche le média suivant dans la lightbox
   showNextMedia() {
     if (this.currentMediaIndex < this.totalMedia.length - 1) {
       this.currentMediaIndex++;
-      this.openLightbox(this.currentMediaIndex, this.photographer);
+      this.openLightboxForMedia(this.currentMediaIndex, this.photographer);
     }
   }
 
@@ -245,7 +337,7 @@ class DetailPhotographerView {
   showPreviousMedia() {
     if (this.currentMediaIndex > 0) {
       this.currentMediaIndex--;
-      this.openLightbox(this.currentMediaIndex, this.photographer);
+      this.openLightboxForMedia(this.currentMediaIndex, this.photographer);
     }
   }
 
@@ -253,4 +345,5 @@ class DetailPhotographerView {
   closeLightbox() {
     this.lightbox.style.display = "none";
   }
+
 }

@@ -8,6 +8,7 @@ class Controller {
         let view = new ListPhotographersView();
         view.displayPhotographersInfos(data);
       }
+     
     }
   
     // Récupération de l'ID du photographe depuis l'URL
@@ -28,12 +29,14 @@ class Controller {
       const totalMedia = await model.getMediaByPhotographerId(
         parseInt(photographerId)
       );
+
   
       const detailPhotographerView = new DetailPhotographerView(photographer,totalMedia);
       detailPhotographerView.displayPhotographerDetails(photographer, totalMedia);
   
      
       }; 
+
    
       
     }
