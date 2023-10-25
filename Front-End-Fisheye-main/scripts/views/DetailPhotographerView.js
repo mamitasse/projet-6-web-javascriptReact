@@ -103,15 +103,51 @@ class DetailPhotographerView {
       });
     
       mediaContainer.appendChild(mediaElement);
-    
+
       // Récupérez le bouton "J'aime" de ce média
       const likeButton = mediaElement.querySelector(".heart-button");
-      
-      // Ajoutez un gestionnaire d'événements pour le bouton "J'aime" pour empêcher la propagation
+
+
+
+// Dans ta méthode htmlMediaFactory() permettant de générer le code HTML de chaque média en fonction du type (image ou vidéo), j'ai rajouté un :
+
+// <span class="span_likes">${media.likes}</span> entre le :
+// <p class="likes" id="likes-${index}"> et le :
+// <button class="heart-button liked" data-index></button>.
+
+      let likes_span_origin = Number((likeButton.previousElementSibling).textContent);
+        // Ici, je récupère le contenu de la balise qui se trouve juste avant la balise <button> =
+        // la balise <span> que j'ai rajouté, avec le ${media.likes} à l'intérieur (que je convertis en nombre).
+
       likeButton.addEventListener("click", (event) => {
-        event.stopPropagation();
+        // Quand je clique sur n'importe quel <button> de n'importe quel média, alors :
+
+        event.stopPropagation(); // empêche la propagation (ça, c'est toi qui l'a mis),
+        let likes_span_new = Number((likeButton.previousElementSibling).textContent)
+          // je récupère, une nouvelle fois, le contenu de la balise qui se trouve juste avant la balise <button> =
+          // la balise <span> que j'ai rajouté, avec le ${media.likes} à l'intérieur (que je convertis en nombre).
+
+          // Ce qui fait au total 2 variables qui récupèrent la même valeur, une avant le clic et une autre après le clic.
+
+        let span_likes = likeButton.previousElementSibling
+          // Je récupère ensuite la balise HTML <span> que j'ai rajouté (élément du DOM)
+
+        if (likes_span_origin == likes_span_new) {
+          // et s'il n'y a aucune différence de valeur entre ma variable avant le clic (likes_span_origin) et ma variable après le clic (likes_span_new),
+
+          likes_span_new++
+            // je peux donc incrémenter ma valeur de 1.
+          span_likes.innerText = likes_span_new
+            // Et pour finir, je viens insérer cette nouvelle valeur dans la balise HTML <span> que j'ai récupéré précédemment (variable span_likes)
+        
+        }
+      
       });
+
+// FIN_CODE_ARTHUR_FERNANDES ##########################################################################################################################################
+
     });
+
   }
 
 // Ajoutez cette méthode dans votre classe DetailPhotographerView
@@ -145,7 +181,15 @@ openLightboxForMedia(index, photographer) {
         </div>
         <div class="info">
           <p>${media.title}</p>
-          <p class="likes" id="likes-${index}">${media.likes} <button class="heart-button liked" data-index><span><img src="assets/icons/coeur.svg" alt="coeur"></span></button></p>
+          <p class="likes" id="likes-${index}">
+            <span class="span_likes">${media.likes}</span>
+            <button class="heart-button liked" data-index>
+              <span>
+                <img src="assets/icons/coeur.svg" alt="coeur">
+              </span>
+            </button>
+          </p>
+        </div>
         `;
     } else if (media.video) {
       return `
@@ -154,7 +198,15 @@ openLightboxForMedia(index, photographer) {
         </div>
         <div class="info">
           <p>${media.title}</p>
-          <p class="likes" id="likes-${index}">${media.likes} <button class="heart-button liked" data-index><span><img src="assets/icons/coeur.svg" alt="coeur"></span></button></p>
+          <p class="likes" id="likes-${index}">
+            <span class="span_likes">${media.likes}</span>
+            <button class="heart-button liked" data-index>
+              <span>
+                <img src="assets/icons/coeur.svg" alt="coeur">
+              </span>
+            </button>
+          </p>
+        </div>
         `;
     }
   }
