@@ -49,7 +49,7 @@ form.addEventListener("submit", function (e) {
   console.log("Message:", message);
 
     // Redirigez l'utilisateur vers la page d'accueil
-    window.location.href = "index.html";
+   
   // Vous pouvez également envoyer ces données à un serveur ici si nécessaire
 });
 

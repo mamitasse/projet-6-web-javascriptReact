@@ -144,7 +144,7 @@ class DetailPhotographerView {
       
       });
 
-// FIN_CODE_ARTHUR_FERNANDES ##########################################################################################################################################
+
 
     });
 
@@ -255,42 +255,7 @@ openLightboxForMedia(index, photographer) {
   }
 
  
-  // Gestion du bouton "J'aime"
-  handleLikeButtonClick(index, likeButton) {
-    const currentLikes = this.likes[index] || 0;
-
-    if (likeButton.classList.contains("liked")) {
-      // Si le média est déjà aimé, diminue le nombre de likes
-      this.decrementLikes(index);
-      likeButton.classList.remove("liked");
-    } else {
-      // Si le média n'est pas encore aimé, augmente le nombre de likes
-      this.incrementLikes(index);
-      likeButton.classList.add("liked");
-    }
-
-    // Mettez à jour l'affichage du nombre de likes
-    this.updateLikesCount(index);
-  }
-
-  // Fonction pour incrémenter le nombre de likes
-  incrementLikes(index) {
-    this.likes[index] = (this.likes[index] || 0) + 1;
-  }
-
-  // Fonction pour décrémenter le nombre de likes
-  decrementLikes(index) {
-    if (this.likes[index] && this.likes[index] > 0) {
-      this.likes[index] -= 1;
-    }
-  }
-
-  // Met à jour l'affichage du nombre de likes
-  updateLikesCount(index) {
-    const likesCountElement = document.getElementById(`likes-${index}`);
-    likesCountElement.textContent = `${this.likes[index] || 0} likes`;
-  }
-
+ 
 
   // Cette méthode trie les médias par popularité (likes)
   sortMediaByPopularity() {
