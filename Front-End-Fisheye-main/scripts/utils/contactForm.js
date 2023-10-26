@@ -1,31 +1,15 @@
-
 function displayModal() {
   const modal = document.getElementById("contact_modal");
   modal.style.display = "block";
-
 }
 
 function closeModal() {
   const modal = document.getElementById("contact_modal");
   modal.style.display = "none";
-
 }
-function displayThankYouMessage() {
-  const thankYouMessage = document.getElementById("thank-you-message");
-  thankYouMessage.style.display = "block";
-}
-
-function closeThankYouMessage() {
-  const thankYouMessage = document.getElementById("thank-you-message");
-  thankYouMessage.style.display = "none";
-}
-
-
-
 const contact_button = document.querySelector(".contact_button");
 
-contact_button.addEventListener("click", function() {
- 
+contact_button.addEventListener("click", function () {
   displayModal();
 });
 
@@ -48,10 +32,9 @@ form.addEventListener("submit", function (e) {
   console.log("Email:", email);
   console.log("Message:", message);
 
-    // Redirigez l'utilisateur vers la page d'accueil
-   
+  // Redirigez l'utilisateur vers la page d'accueil
+
   // Vous pouvez également envoyer ces données à un serveur ici si nécessaire
 });
 
 // La console affichera les données lorsque le formulaire est soumis.
-

@@ -10,14 +10,17 @@
       href="https://fonts.googleapis.com/css?family=DM+Sans&display=swap"
       rel="stylesheet"
     />
-    <script src="https://kit.fontawesome.com/db9c392b13.js" crossorigin="anonymous"></script>
+    <script
+      src="https://kit.fontawesome.com/db9c392b13.js"
+      crossorigin="anonymous"
+    ></script>
 
     <title>Fisheye - photographe</title>
   </head>
   <body>
     <header>
-      <a href="index.html" class="logo" >
-        <img src="assets/images/logo.png" alt="fisheye logo" tabindex="1"/>
+      <a href="index.html" class="logo">
+        <img src="assets/images/logo.png" alt="fisheye logo" tabindex="1" />
       </a>
     </header>
     <main id="main">
@@ -27,28 +30,32 @@
         </button>
       </div>
       <div class="tri" tabindex="7">
-      <p class="trierPar">Trier par</p>
-      <div id="select" class="dropdown">
-        <button class="dropdown-button" id="toggleDropdown" tabindex="7">
-          Popularité <i class="fa fa-chevron-down  chevron"></i>
-        </button>
-        <div class="trait">  </div>
-        <div class="dropdown-content" id="dropdownContent" tabindex="7" >
-          <button id="sortByTitle" tabindex="7" >Titre</button>
-          <div class="trait traitTitre ">  </div>
-          <button id="sortByDate" tabindex="7" >Date</button>
+        <p class="trierPar">Trier par</p>
+        <div id="select" class="dropdown">
+          <button class="dropdown-button" id="toggleDropdown" tabindex="7">
+            Popularité <i class="fa fa-chevron-down chevron"></i>
+          </button>
+          <div class="trait"></div>
+          <div class="dropdown-content" id="dropdownContent" tabindex="7">
+            <button id="sortByTitle" tabindex="7">Titre</button>
+            <div class="trait traitTitre"></div>
+            <button id="sortByDate" tabindex="7">Date</button>
+          </div>
         </div>
       </div>
-    </div>
       <div id="catalogue" tabindex="8"></div>
       <p id="totalLikes" tabindex="9"></p>
     </main>
     <div id="contact_modal" tabindex="5">
       <div class="modal">
         <header>
-          <h2 class="titreModal" tabindex="5" >Contactez-moi</h2>
-          <img src="assets/icons/close.svg" onclick="closeModal()" alt="fermer la modal" tabindex="5"/>
-          
+          <h2 class="titreModal" tabindex="5">Contactez-moi</h2>
+          <img
+            src="assets/icons/close.svg"
+            onclick="closeModal()"
+            alt="fermer la modal"
+            tabindex="5"
+          />
         </header>
         <form>
           <div>
@@ -102,35 +109,41 @@
           >
             Envoyer
           </button>
-        
         </form>
       </div>
     </div>
     <div id="lightbox">
       <div class="lightbox__content" aria-label="image closeup view">
-        <button class="close-btn" role="button" aria-label="Fermer la lightbox">X</button>
-        <a class="lightbox__previous" role="button" aria-label="Image précédente" tabindex="0">
+        <button class="close-btn" role="button" aria-label="Fermer la lightbox">
+          X
+        </button>
+        <a
+          class="lightbox__previous"
+          role="button"
+          aria-label="Image précédente"
+          tabindex="0"
+        >
           <i class="fa-solid fa-chevron-left" tabindex="0"></i>
         </a>
         <div class="lightbox__media">
           <!-- L'image ou la vidéo va ici -->
         </div>
-        <a class="lightbox__next" role="button" aria-label="Image suivante" tabindex="0">
+        <a
+          class="lightbox__next"
+          role="button"
+          aria-label="Image suivante"
+          tabindex="0"
+        >
           <i class="fa-solid fa-chevron-right" tabindex="0"></i>
         </a>
         <div class="lightbox__title">Titre du média</div>
       </div>
-      
     </div>
 
     <script src="scripts/utils/contactForm.js"></script>
     <script src="scripts/Model.js"></script>
     <script src="scripts/views/DetailPhotographerView.js"></script>
     <script src="scripts/Controller.js"></script>
-    
-
-
- 
 
     <script>
       let controller = new Controller();
