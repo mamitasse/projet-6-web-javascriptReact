@@ -14,7 +14,13 @@ class DetailPhotographerView {
     this.closeButton = document.querySelector(".close-btn");
     this.likeButtons = document.querySelectorAll(".heart-button");
 
+    // Récupérez l'élément HTML qui affiche le total des likes du photographe
+    this.totalLikesElement = document.getElementById("totalLikes");
 
+    this.totalPhotographerLikes = parseInt(
+      this.totalLikesElement.textContent,
+      10
+    );
 
     this.manageDropdown();
 
@@ -38,8 +44,6 @@ class DetailPhotographerView {
       if (e.key === "ArrowRight") this.showNextMedia();
     });
 
-    
-
     // Gestion du bouton de fermeture de la lightbox
     this.closeButton.addEventListener("click", () => {
       this.closeLightbox();
@@ -49,12 +53,13 @@ class DetailPhotographerView {
     this.setupMediaEventHandlers();
   }
 
- 
-
   // Cette méthode affiche les détails du photographe et sa galerie de médias
   displayPhotographerDetails(photographer, totalMedia) {
     this.totalMedia = totalMedia;
     this.photographer = photographer;
+
+    // Calcul du total des likes du photographe
+    this.totalPhotographerLikes = this.calculateTotalLikes();
 
     // Affichage des informations du photographe
     const photographerHeader = document.querySelector(".photograph-header");
@@ -79,10 +84,9 @@ class DetailPhotographerView {
       (total, media) => total + media.likes,
       0
     );
-
     // Affichage du total des likes du photographe
     const totalLikesElement = document.getElementById("totalLikes");
-    totalLikesElement.innerHTML = `<div> ${totalLikes} <span class="heart">&#x1F5A4;</span></div><div> ${photographer.price}€/jour</div>`;
+    totalLikesElement.innerHTML = `<div tabindex="9"> ${this.totalPhotographerLikes} <span class="heart">&#x1F5A4;</span></div><div> ${photographer.price}€/jour</div>`;
 
     // Affichage des médias dans la galerie
     const mediaContainer = document.getElementById("catalogue");
@@ -95,82 +99,86 @@ class DetailPhotographerView {
       mediaElement.setAttribute("data-date", media.date);
       mediaElement.setAttribute("data-title", media.title);
 
-      mediaElement.innerHTML = this.htmlMediaFactory(photographer, media, index);
+      mediaElement.innerHTML = this.htmlMediaFactory(
+        photographer,
+        media,
+        index
+      );
 
       // Ajout d'un gestionnaire d'événements pour ouvrir la lightbox lors du clic sur le média
       mediaElement.addEventListener("click", () => {
         this.openLightboxForMedia(index, photographer);
       });
-    
-      mediaContainer.appendChild(mediaElement);
 
+      mediaContainer.appendChild(mediaElement);
       // Récupérez le bouton "J'aime" de ce média
       const likeButton = mediaElement.querySelector(".heart-button");
 
+      // Dans ta méthode htmlMediaFactory() permettant de générer le code HTML de chaque média en fonction du type (image ou vidéo), j'ai rajouté un :
 
+      // <span class="span_likes">${media.likes}</span> entre le :
+      // <p class="likes" id="likes-${index}"> et le :
+      // <button class="heart-button liked" data-index></button>.
 
-// Dans ta méthode htmlMediaFactory() permettant de générer le code HTML de chaque média en fonction du type (image ou vidéo), j'ai rajouté un :
-
-// <span class="span_likes">${media.likes}</span> entre le :
-// <p class="likes" id="likes-${index}"> et le :
-// <button class="heart-button liked" data-index></button>.
-
-      let likes_span_origin = Number((likeButton.previousElementSibling).textContent);
-        // Ici, je récupère le contenu de la balise qui se trouve juste avant la balise <button> =
-        // la balise <span> que j'ai rajouté, avec le ${media.likes} à l'intérieur (que je convertis en nombre).
+      let likes_span_origin = Number(
+        likeButton.previousElementSibling.textContent
+      );
+      // Ici, je récupère le contenu de la balise qui se trouve juste avant la balise <button> =
+      // la balise <span> que j'ai rajouté, avec le ${media.likes} à l'intérieur (que je convertis en nombre).
 
       likeButton.addEventListener("click", (event) => {
-        // Quand je clique sur n'importe quel <button> de n'importe quel média, alors :
-
         event.stopPropagation(); // empêche la propagation (ça, c'est toi qui l'a mis),
-        let likes_span_new = Number((likeButton.previousElementSibling).textContent)
-          // je récupère, une nouvelle fois, le contenu de la balise qui se trouve juste avant la balise <button> =
-          // la balise <span> que j'ai rajouté, avec le ${media.likes} à l'intérieur (que je convertis en nombre).
+        let likes_span_new = Number(
+          likeButton.previousElementSibling.textContent
+        );
+        // je récupère, une nouvelle fois, le contenu de la balise qui se trouve juste avant la balise <button> =
+        // la balise <span> que j'ai rajouté, avec le ${media.likes} à l'intérieur (que je convertis en nombre).
 
-          // Ce qui fait au total 2 variables qui récupèrent la même valeur, une avant le clic et une autre après le clic.
+        // Ce qui fait au total 2 variables qui récupèrent la même valeur, une avant le clic et une autre après le clic.
 
-        let span_likes = likeButton.previousElementSibling
-          // Je récupère ensuite la balise HTML <span> que j'ai rajouté (élément du DOM)
+        let span_likes = likeButton.previousElementSibling;
+        // Je récupère ensuite la balise HTML <span> que j'ai rajouté (élément du DOM)
 
         if (likes_span_origin == likes_span_new) {
           // et s'il n'y a aucune différence de valeur entre ma variable avant le clic (likes_span_origin) et ma variable après le clic (likes_span_new),
 
-          likes_span_new++
-            // je peux donc incrémenter ma valeur de 1.
-          span_likes.innerText = likes_span_new
-            // Et pour finir, je viens insérer cette nouvelle valeur dans la balise HTML <span> que j'ai récupéré précédemment (variable span_likes)
-        
+          likes_span_new++;
+          // je peux donc incrémenter ma valeur de 1.
+          span_likes.innerText = likes_span_new;
+          // Et pour finir, je viens insérer cette nouvelle valeur dans la balise HTML <span> que j'ai récupéré précédemment (variable span_likes)
+          // Incrémentation du compteur total des likes du photographe
+          this.totalPhotographerLikes += likeButton.classList.contains("liked")
+            ? 1
+            : -1;
+
+          // Mettez à jour l'affichage du total des likes du photographe
+          totalLikesElement.innerHTML = `<div> ${this.totalPhotographerLikes} <span class="heart">&#x1F5A4;</span></div><div> ${photographer.price}€/jour</div>`;
         }
-      
       });
-
-
-
     });
-
   }
 
-// Ajoutez cette méthode dans votre classe DetailPhotographerView
-openLightboxForMedia(index, photographer) {
-  this.currentMediaIndex = index;
-  const media = this.totalMedia[index];
+  // Ajoutez cette méthode dans votre classe DetailPhotographerView
+  openLightboxForMedia(index, photographer) {
+    this.currentMediaIndex = index;
+    const media = this.totalMedia[index];
 
-  this.lightboxMedia.innerHTML = "";
+    this.lightboxMedia.innerHTML = "";
 
-  if (media.image) {
-    const img = document.createElement("img");
-    img.src = `assets/photographers/Sample Photos/${photographer.name}-${photographer.id}/${media.image}`;
-    this.lightboxMedia.appendChild(img);
-  } else if (media.video) {
-    const video = document.createElement("video");
-    video.src = `assets/photographers/Sample Photos/${photographer.name}-${photographer.id}/${media.video}`;
-    video.controls = true;
-    this.lightboxMedia.appendChild(video);
+    if (media.image) {
+      const img = document.createElement("img");
+      img.src = `assets/photographers/Sample Photos/${photographer.name}-${photographer.id}/${media.image}`;
+      this.lightboxMedia.appendChild(img);
+    } else if (media.video) {
+      const video = document.createElement("video");
+      video.src = `assets/photographers/Sample Photos/${photographer.name}-${photographer.id}/${media.video}`;
+      video.controls = true;
+      this.lightboxMedia.appendChild(video);
+    }
+
+    this.lightboxTitle.textContent = media.title;
+    this.lightbox.style.display = "block";
   }
-
-  this.lightboxTitle.textContent = media.title;
-  this.lightbox.style.display = "block";
-}
 
   // Méthode pour générer le code HTML de chaque média en fonction du type (image ou vidéo)
   htmlMediaFactory(photographer, media, index) {
@@ -183,7 +191,7 @@ openLightboxForMedia(index, photographer) {
           <p>${media.title}</p>
           <p class="likes" id="likes-${index}">
             <span class="span_likes">${media.likes}</span>
-            <button class="heart-button liked" data-index>
+            <button class="heart-button liked" data-index tabindex="8">
               <span>
                 <img src="assets/icons/coeur.svg" alt="coeur">
               </span>
@@ -200,7 +208,7 @@ openLightboxForMedia(index, photographer) {
           <p>${media.title}</p>
           <p class="likes" id="likes-${index}">
             <span class="span_likes">${media.likes}</span>
-            <button class="heart-button liked" data-index>
+            <button class="heart-button liked" data-index tabindex="8">
               <span>
                 <img src="assets/icons/coeur.svg" alt="coeur">
               </span>
@@ -211,40 +219,36 @@ openLightboxForMedia(index, photographer) {
     }
   }
 
-
   setupMediaEventHandlers() {
     const photoMediaElements = document.querySelectorAll(".photo-media img");
     const videoMediaElements = document.querySelectorAll(".video-media video");
-  
+
     photoMediaElements.forEach((photoMedia, index) => {
+      // Récupérez le bouton "J'aime" du média
+      const likeButton = mediaElement.querySelector(".like-button");
 
-      
-       // Récupérez le bouton "J'aime" du média
-    const likeButton = mediaElement.querySelector(".like-button");
-
-    likeButton.addEventListener("click", (event) => {
-      event.stopPropagation(); // Empêche la propagation de l'événement
-      this. handleLikeButtonClick(index, likeButton);
-      console.log("le bouton like est clique")
-    });
+      likeButton.addEventListener("click", (event) => {
+        event.stopPropagation(); // Empêche la propagation de l'événement
+        this.handleLikeButtonClick(index, likeButton);
+        console.log("le bouton like est clique");
+      });
       photoMedia.addEventListener("click", () => {
         this.openLightboxForMedia(index, this.photographer); // Utilisez openLightboxForMedia
       });
-  
+
       // Affiche la lightbox uniquement si la touche "Entrée" est pressée
       photoMedia.addEventListener("keydown", (e) => {
         if (e.key === "Enter") {
           this.openLightboxForMedia(index, this.photographer); // Utilisez openLightboxForMedia
         }
       });
-      
     });
-  
+
     videoMediaElements.forEach((videoMedia, index) => {
       videoMedia.addEventListener("click", () => {
         this.openLightboxForMedia(index, this.photographer); // Utilisez openLightboxForMedia
       });
-  
+
       // Affiche la lightbox uniquement si la touche "Entrée" est pressée
       videoMedia.addEventListener("keydown", (e) => {
         if (e.key === "Enter") {
@@ -253,9 +257,6 @@ openLightboxForMedia(index, photographer) {
       });
     });
   }
-
- 
- 
 
   // Cette méthode trie les médias par popularité (likes)
   sortMediaByPopularity() {
@@ -338,10 +339,6 @@ openLightboxForMedia(index, photographer) {
     });
   }
 
-
-
- 
-
   // Cette méthode affiche le média suivant dans la lightbox
   showNextMedia() {
     if (this.currentMediaIndex < this.totalMedia.length - 1) {
@@ -363,4 +360,7 @@ openLightboxForMedia(index, photographer) {
     this.lightbox.style.display = "none";
   }
 
+  calculateTotalLikes() {
+    return this.totalMedia.reduce((total, media) => total + media.likes, 0);
+  }
 }
