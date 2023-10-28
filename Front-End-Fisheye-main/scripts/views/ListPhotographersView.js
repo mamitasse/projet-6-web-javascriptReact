@@ -10,12 +10,12 @@ class ListPhotographersView {
         photographerElement.classList.add("photographer");
 
         photographerElement.innerHTML = `
-                <a href="photographer.html?id=${photographer.id}" aria-label="View ${photographer.name}'s profile">
-                <img src="assets/photographers/Sample Photos/Photographers ID Photos/${photographer.portrait}" alt="${photographer.name}" class="portrait">
+                <a href="photographer.html?id=${photographer.id}" aria-label="View ${photographer.name}'s profile" tabindes="2">
+                <img src="assets/photographers/Sample Photos/Photographers ID Photos/${photographer.portrait}" alt="${photographer.name}" class="portrait" >
                 </a>
-            <h2>${photographer.name}</h2>
-            <p class="infoVille">${photographer.city}, ${photographer.country}</p>
-            <p class="infoDoc">${photographer.tagline}</p>
+            <h2 >${photographer.name}</h2>
+            <p class="infoVille" >${photographer.city}, ${photographer.country}</p>
+            <p class="infoDoc" >${photographer.tagline}</p>
             <p class="infoPrix"> ${photographer.price}€/jour</p>
         `;
         photographerElement

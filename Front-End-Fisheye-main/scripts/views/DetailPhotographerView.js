@@ -64,14 +64,14 @@ class DetailPhotographerView {
     // Affichage des informations du photographe
     const photographerHeader = document.querySelector(".photograph-header");
     photographerHeader.innerHTML = `
-      <div class="photographer-info">
-        <h1 tabindex="2">${photographer.name}</h1>
-        <p tabindex="3">${photographer.city}, ${photographer.country}</p>
-        <p tabindex="4">${photographer.tagline}</p>
+      <div class="photographer-info" tabindex="0">
+        <h1 taindex="0" >${photographer.name}</h1>
+        <p >${photographer.city}, ${photographer.country}</p>
+        <p >${photographer.tagline}</p>
       </div>
-      <button tabindex="5" class="contact_button" onclick="displayModal()">Contactez-moi </button>
-      <div class="photographer-photo" tabindex="6">
-        <img src="assets/photographers/Sample Photos/Photographers ID Photos/${photographer.portrait}" alt="${photographer.name}" />
+      <button  class="contact_button" onclick="displayModal()" >Contactez-moi </button>
+      <div class="photographer-photo" >
+        <img src="assets/photographers/Sample Photos/Photographers ID Photos/${photographer.portrait}" alt="${photographer.name}"tabindex="0"/>
       </div>
     `;
 
@@ -86,7 +86,7 @@ class DetailPhotographerView {
     );
     // Affichage du total des likes du photographe
     const totalLikesElement = document.getElementById("totalLikes");
-    totalLikesElement.innerHTML = `<div tabindex="9"> ${this.totalPhotographerLikes} <span class="heart">&#x1F5A4;</span></div><div> ${photographer.price}€/jour</div>`;
+    totalLikesElement.innerHTML = `<div > ${this.totalPhotographerLikes} <span class="heart">&#x1F5A4;</span></div><div> ${photographer.price}€/jour</div>`;
 
     // Affichage des médias dans la galerie
     const mediaContainer = document.getElementById("catalogue");
@@ -184,37 +184,40 @@ class DetailPhotographerView {
   htmlMediaFactory(photographer, media, index) {
     if (media.image) {
       return `
-        <div class="photo-media" tabindex="8">
-          <img src="assets/photographers/Sample Photos/${photographer.name}-${photographer.id}/${media.image}" alt="${media.title}" />
-        </div>
-        <div class="info">
+      <figure class="photo-media">
+          <img src="assets/photographers/Sample Photos/${photographer.name}-${photographer.id}/${media.image}" alt="${media.title}" tabindex="0" />
+        
+        <figcaption class="info">
           <p>${media.title}</p>
           <p class="likes" id="likes-${index}">
             <span class="span_likes">${media.likes}</span>
-            <button class="heart-button liked" data-index tabindex="8">
+            <button class="heart-button liked" data-index>
               <span>
                 <img src="assets/icons/coeur.svg" alt="coeur">
               </span>
             </button>
           </p>
-        </div>
+          </figcaption>
+          </figure 
         `;
     } else if (media.video) {
       return `
-        <div class="video-media" tabindex="8">
-          <video src="assets/photographers/Sample Photos/${photographer.name}-${photographer.id}/${media.video}" class="video" controls autoplay></video>
-        </div>
-        <div class="info">
+        <figure class="video-media">
+          <video src="assets/photographers/Sample Photos/${photographer.name}-${photographer.id}/${media.video}" class="video" controls autoplay tabindex="0"></video>
+        
+        <figcaption class="info">
           <p>${media.title}</p>
           <p class="likes" id="likes-${index}">
             <span class="span_likes">${media.likes}</span>
-            <button class="heart-button liked" data-index tabindex="8">
+            <button class="heart-button liked" data-index >
               <span>
                 <img src="assets/icons/coeur.svg" alt="coeur">
               </span>
             </button>
           </p>
-        </div>
+
+        </figcaption>
+        </figure
         `;
     }
   }
