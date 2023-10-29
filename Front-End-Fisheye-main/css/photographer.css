@@ -2,14 +2,12 @@
   margin: 0;
   padding: 0%;
 }
-html{
+html {
   display: flex;
   align-items: center;
-
-
 }
 
-body{
+body {
   margin: auto;
 
   align-items: center;
@@ -25,7 +23,7 @@ header img {
   margin-bottom: 30px;
   padding-left: 70px;
 }
-header{
+header {
   margin-top: 42px;
   display: flex;
   flex-direction: row;
@@ -43,11 +41,8 @@ header{
   max-width: 1240px;
   background-color: #fafafa;
   display: flex;
-  justify-content:center;
+  justify-content: center;
   align-items: center;
-
- 
-
 }
 
 .photographer-photo {
@@ -57,7 +52,6 @@ header{
 
   margin-left: auto;
   margin-right: auto;
-
 }
 
 .photograph-header img {
@@ -75,7 +69,6 @@ header{
   width: auto;
   text-align: start;
   margin-left: auto;
- 
 }
 .photograph-header p {
   color: #901c1c;
@@ -101,7 +94,7 @@ header{
   font-size: 20px;
   font-weight: bold;
   color: white;
-  
+
   width: 170px;
   height: 70px;
   border: none;
@@ -113,12 +106,9 @@ header{
   margin-right: auto;
 }
 
-
 /************************CATALOGUE*************************/
 
 #catalogue {
-
-
   display: grid;
   grid-template-columns: repeat(3, 1fr);
   align-items: center;
@@ -134,27 +124,12 @@ header{
 }
 
 /****************************MODAL***************************/
-#contact_modal {
-  height: 60vh;
-  display: none;
-  position: fixed;
-  z-index: 1;
-  left: 0;
-  top: 0;
-  height: 100%;
-  width: 100%;
-  overflow: hidden;
-  top: 50%;
-  left: 50%;
-  z-index: 1000;
-  transform: translate(-50%, -50%);
- 
-}
 
 .modal {
   width: 669px;
+
   flex-shrink: 0;
-  margin-top: 30px;
+  margin-top: 10px;
   border-radius: 5px;
   background-color: #db8876;
   display: flex;
@@ -164,84 +139,115 @@ header{
   border-radius: 5px;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
   position: relative;
+  /* La hauteur maximale est de 90% de la hauteur de l'écran */
   overflow: hidden;
-  padding-left: 30px;
-  margin-top: 30px;
+  padding-left: 10px;
   margin-bottom: auto;
   padding-top: 20px;
-  padding-right: 50px;
+  padding-right: 40px;
 
 }
-
 .modal header {
   margin: 0px;
   padding-bottom: 30px;
-  padding-left: 40PX;
+  padding-left: 40px;
 }
+
+#contact_modal {
+	display: none;
+	width: 100%;
+	height: 100%;
+	position: fixed;
+	top: 0;
+	left: 0;
+	background-color: #fafafa80;
+	z-index: 6;
+}
+
+.modal header {
+  justify-content: space-between;
+  width: 100%;
+ }
+
+
 
 .modal header img {
   cursor: pointer;
-  right: 20px;
   position: absolute;
   top: 10px;
   right: 40px;
-  font-size: 200px;
+  font-size:30px;
   cursor: pointer;
 }
-
-
-.modal header h2 {
-  font-size: 64px;
-  font-weight: normal;
-  text-align: left;
-  margin-top: 0;
-  margin-bottom: 0;
-
+.modal header img {
+  cursor: pointer;
+  right: 40px;
 }
 
+.modal header h2 {
+  font-size: 50px;
+  font-weight: normal;
+  text-align:start;
+  margin-top: 0;
+  margin-bottom: 0;
+  line-height: 1;
+  padding: 0%;
+ 
+  }
+
 form {
-  
-  display: flex;
+   display: flex;
   width: 699px;
   flex-direction: column;
   margin-left: auto;
   margin-right: auto;
+  line-height: 1;
+  height: 97%;
 }
 
 form label {
   color: #312e2e;
-  font-size: 36px;
-  height: 40px;
- 
-  
-}
+  font-size: 30px;
+  height: 30px;
+  margin-top:5px;
+  margin-bottom: 0px;
+ }
+
 
 form div {
   display: flex;
   flex-direction: column;
   justify-content: center;
-
   margin-left: auto;
   margin-right: auto;
+
 }
 
 form input {
-  height: 68px;
-  width: 599px;
+  height: 40px;
+  width:599px;
   margin-left: auto;
   margin-right: auto;
   
 }
-
+.modal header img {
+  position: absolute;
+  top: 30px;
+  right: 40px;
+  font-size: 200px;
+  cursor: pointer;
+}
 #message {
-  width: 599px;
-  height: 170px;
+  width:599px;
+  height: 90px;
   margin-bottom: 20px;
   margin-left: auto;
   margin-right: auto;
 }
-
-
+.envoyer{
+  margin-left: 48px;
+  padding-bottom: 0%;
+}
 /****************************MEDIA********************************/
 
 .media img {
@@ -251,8 +257,8 @@ form input {
   border-radius: 5px;
   padding: 0%;
 }
-.media img:hover{
-  transform: scale(1.02,1.02);
+.media img:hover {
+  transform: scale(1.02, 1.02);
 }
 .media video {
   width: 350px;
@@ -261,8 +267,8 @@ form input {
   border-radius: 5px;
   padding: 0px;
 }
-.media video:hover{
-  transform: scale(1.02,1.02);
+.media video:hover {
+  transform: scale(1.02, 1.02);
 }
 .media {
   margin-top: 40px;
@@ -275,27 +281,27 @@ form input {
   font-weight: 400;
   line-height: normal;
   margin: 0%;
-}.media p span img {
- 
+}
+.media p span img {
   height: 24px;
   width: 24px;
   object-fit: cover;
   border: none;
   border-color: transparent;
   background-color: transparent;
-  }
-  .media p span img:hover{
-    transform: scale(1.1);
-    border: none;
-    border-color: transparent;
-    background-color: transparent;
-    transform: scale(1.02,1.02);
-  }
-  .media p span{
-    border: none;
-    border-color: transparent;
-    background-color: transparent;
-  }
+}
+.media p span img:hover {
+  transform: scale(1.1);
+  border: none;
+  border-color: transparent;
+  background-color: transparent;
+  transform: scale(1.02, 1.02);
+}
+.media p span {
+  border: none;
+  border-color: transparent;
+  background-color: transparent;
+}
 .media .info {
   color: #901c1c;
   font-family: DM Sans;
@@ -313,7 +319,7 @@ form input {
   text-align: end;
 }
 .media .likes {
-display: flex;
+  display: flex;
   align-items: end;
   flex-direction: row;
   justify-content: baseline;
@@ -354,7 +360,6 @@ display: flex;
   width: 170px;
 }
 
-
 .trait {
   height: 1.5px;
   flex-shrink: 0;
@@ -381,7 +386,6 @@ display: flex;
   font-style: normal;
   font-weight: 700;
   line-height: normal;
-  
 }
 .chevron {
   font-size: 12px;
@@ -401,12 +405,12 @@ display: flex;
   align-items: center;
   justify-content: center;
   display: none;
-	width: 100%;
-	height: 100%;
-	position: fixed;
-	top: 0;
-	left: 0;
-	background-color: #fafafa;
+  width: 100%;
+  height: 100%;
+  position: fixed;
+  top: 0;
+  left: 0;
+  background-color: #fafafa;
 }
 
 .lightbox__content {
@@ -423,11 +427,11 @@ display: flex;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
   overflow: hidden;
   position: absolute;
-	width: 85vh;
-	height: 85vh;
-	top: 45%;
-	left: 50%;
-	transform: translate(-50%, -50%);
+  width: 85vh;
+  height: 85vh;
+  top: 45%;
+  left: 50%;
+  transform: translate(-50%, -50%);
 }
 
 .lightbox__previous,
@@ -464,22 +468,20 @@ display: flex;
   justify-content: center;
   align-items: center;
   width: 100%;
- height: 100%;
+  height: 100%;
 }
 .lightbox__media img,
 .lightbox__media video {
-
   margin-left: 36px;
- 
+
   overflow: hidden;
   object-fit: cover;
 
   border: 20px solid #fff; /* Ajoute une bordure blanche de 10 pixels */
 
- width: 100%;
-height: 100%;
-	object-fit: cover;
-
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
 }
 
 .close-btn {
@@ -506,7 +508,6 @@ height: 100%;
   margin-top: 0px;
   padding: 0;
 }
-
 
 .info {
   display: flex;
@@ -550,42 +551,35 @@ height: 100%;
 }
 #lightbox {
   display: none;
+}
 
- 
-}
-.envoyer{
-  margin-left: 48px;
-  padding-bottom: 0%;
-}
-header img{
+header img {
   margin-left: auto;
 }
-#totalLikes{
-height: 89px;
-width: 375px;
-background-color:#db8876;
-position: fixed;
-right: 0%;
-bottom: 0%;
-border-radius: 5px;
-color: #000;
-text-align: center;
-font-family: DM Sans;
-font-size: 24px;
-font-style: normal;
-font-weight: 500;
-line-height: normal;
-display: flex;
-flex-direction: row;
-justify-content: space-around;
-align-items: center;
-margin-top: 50px;
-
+#totalLikes {
+  height: 89px;
+  width: 375px;
+  background-color: #db8876;
+  position: fixed;
+  right: 0%;
+  bottom: 0%;
+  border-radius: 5px;
+  color: #000;
+  text-align: center;
+  font-family: DM Sans;
+  font-size: 24px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: normal;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  align-items: center;
+  margin-top: 50px;
 }
-.heart-button{
+.heart-button {
   border: none;
 }
-
 
 @media screen and (max-width: 900px) {
   .photograph-header {
@@ -593,18 +587,31 @@ margin-top: 50px;
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    margin-left:30px;
+    margin-left: 30px;
   }
   .photographer-info {
     margin-bottom: 20px;
     width: auto;
   }
-  body{
+  body {
     margin-left: 30px;
   }
-  #catalogue{
+  #catalogue {
     display: flex;
     justify-content: center;
-    flex-direction: column;align-items: center;
+    flex-direction: column;
+    align-items: center;
+  }
+}
+@media screen and (max-width: 700px) {
+  .photograph-header {
+    display: flex;
+    flex-direction: column;
+
+    align-items: center;
+  }
+  .photographer-info {
+    margin-bottom: 20px;
+    width: auto;
   }
 }
