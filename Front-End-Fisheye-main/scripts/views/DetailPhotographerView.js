@@ -109,44 +109,42 @@ class DetailPhotographerView {
       mediaElement.addEventListener("click", () => {
         this.openLightboxForMedia(index, photographer);
       });
+      //gestion de la touche entree pour ouvrir la lightbox
+      mediaElement.addEventListener("keydown", (e) => {
+        if (e.key === "Enter") this.openLightboxForMedia(index, photographer);
+      });
 
       mediaContainer.appendChild(mediaElement);
       // Récupérez le bouton "J'aime" de ce média
       const likeButton = mediaElement.querySelector(".heart-button");
 
-      // Dans ta méthode htmlMediaFactory() permettant de générer le code HTML de chaque média en fonction du type (image ou vidéo), j'ai rajouté un :
-
-      // <span class="span_likes">${media.likes}</span> entre le :
-      // <p class="likes" id="likes-${index}"> et le :
-      // <button class="heart-button liked" data-index></button>.
-
       let likes_span_origin = Number(
         likeButton.previousElementSibling.textContent
       );
-      // Ici, je récupère le contenu de la balise qui se trouve juste avant la balise <button> =
-      // la balise <span> que j'ai rajouté, avec le ${media.likes} à l'intérieur (que je convertis en nombre).
 
       likeButton.addEventListener("click", (event) => {
         event.stopPropagation(); // empêche la propagation (ça, c'est toi qui l'a mis),
         let likes_span_new = Number(
           likeButton.previousElementSibling.textContent
         );
-        // je récupère, une nouvelle fois, le contenu de la balise qui se trouve juste avant la balise <button> =
-        // la balise <span> que j'ai rajouté, avec le ${media.likes} à l'intérieur (que je convertis en nombre).
-
-        // Ce qui fait au total 2 variables qui récupèrent la même valeur, une avant le clic et une autre après le clic.
 
         let span_likes = likeButton.previousElementSibling;
         // Je récupère ensuite la balise HTML <span> que j'ai rajouté (élément du DOM)
 
         if (likes_span_origin == likes_span_new) {
-          // et s'il n'y a aucune différence de valeur entre ma variable avant le clic (likes_span_origin) et ma variable après le clic (likes_span_new),
-
           likes_span_new++;
           // je peux donc incrémenter ma valeur de 1.
           span_likes.innerText = likes_span_new;
-          // Et pour finir, je viens insérer cette nouvelle valeur dans la balise HTML <span> que j'ai récupéré précédemment (variable span_likes)
-          // Incrémentation du compteur total des likes du photographe
+
+          this.totalPhotographerLikes += likeButton.classList.contains("liked")
+            ? 1
+            : -1;
+
+          // Mettez à jour l'affichage du total des likes du photographe
+          totalLikesElement.innerHTML = `<div> ${this.totalPhotographerLikes} <span class="heart">&#x1F5A4;</span></div><div> ${photographer.price}€/jour</div>`;
+        } else {
+          likes_span_new--;
+          span_likes.innerText = likes_span_new;
           this.totalPhotographerLikes += likeButton.classList.contains("liked")
             ? 1
             : -1;
@@ -158,7 +156,6 @@ class DetailPhotographerView {
     });
   }
 
-  // Ajoutez cette méthode dans votre classe DetailPhotographerView
   openLightboxForMedia(index, photographer) {
     this.currentMediaIndex = index;
     const media = this.totalMedia[index];
@@ -221,7 +218,7 @@ class DetailPhotographerView {
         `;
     }
   }
-
+  // gestion des evenement media photo video
   setupMediaEventHandlers() {
     const photoMediaElements = document.querySelectorAll(".photo-media img");
     const videoMediaElements = document.querySelectorAll(".video-media video");
@@ -230,11 +227,6 @@ class DetailPhotographerView {
       // Récupérez le bouton "J'aime" du média
       const likeButton = mediaElement.querySelector(".like-button");
 
-      likeButton.addEventListener("click", (event) => {
-        event.stopPropagation(); // Empêche la propagation de l'événement
-        this.handleLikeButtonClick(index, likeButton);
-        console.log("le bouton like est clique");
-      });
       photoMedia.addEventListener("click", () => {
         this.openLightboxForMedia(index, this.photographer); // Utilisez openLightboxForMedia
       });
@@ -249,6 +241,7 @@ class DetailPhotographerView {
 
     videoMediaElements.forEach((videoMedia, index) => {
       videoMedia.addEventListener("click", () => {
+        console.log("Touche Entrée pressée sur une image");
         this.openLightboxForMedia(index, this.photographer); // Utilisez openLightboxForMedia
       });
 

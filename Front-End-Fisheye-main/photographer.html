@@ -43,8 +43,8 @@
           </div>
         </div>
       </div>
-      <div id="catalogue" ></div>
-      <p id="totalLikes"></p>
+      <div id="catalogue" tabindex="0"></div>
+      <p id="totalLikes" ></p>
     </main>
     <section id="contact_modal" >
       <div class="modal">
@@ -113,31 +113,33 @@
       </div>
     </section>
 
-    <div id="lightbox">
-      <div class="lightbox__content" aria-label="image closeup view">
-        <button class="close-btn" role="button" aria-label="Fermer la lightbox">
+    <div id="lightbox" tabindex="0">
+      <div class="lightbox__content" aria-label="image closeup view" tabindex="0">
+        <button class="close-btn" role="button" aria-label="Fermer la lightbox" tabindex="5">
           X
         </button>
         <a
           class="lightbox__previous"
           role="button"
           aria-label="Image précédente"
+          tabindex="4"
    
         >
           <i class="fa-solid fa-chevron-left"></i>
         </a>
-        <div class="lightbox__media">
+        <div class="lightbox__media" tabindex="2">
           <!-- L'image ou la vidéo va ici -->
         </div>
         <a
           class="lightbox__next"
           role="button"
           aria-label="Image suivante"
+          tabindex="5"
         
         >
           <i class="fa-solid fa-chevron-right" ></i>
         </a>
-        <div class="lightbox__title">Titre du média</div>
+        <div class="lightbox__title" tabindex="3">Titre du média</div>
       </div>
     </div>
 
