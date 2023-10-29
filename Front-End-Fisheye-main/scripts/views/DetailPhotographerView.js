@@ -145,7 +145,7 @@ class DetailPhotographerView {
         } else {
           likes_span_new--;
           span_likes.innerText = likes_span_new;
-          this.totalPhotographerLikes += likeButton.classList.contains("liked")
+          this.totalPhotographerLikes -= likeButton.classList.contains("liked")
             ? 1
             : -1;
 
