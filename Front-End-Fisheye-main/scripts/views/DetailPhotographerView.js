@@ -66,8 +66,8 @@ class DetailPhotographerView {
     photographerHeader.innerHTML = `
       <div class="photographer-info" tabindex="0">
         <h1 taindex="0" >${photographer.name}</h1>
-        <p >${photographer.city}, ${photographer.country}</p>
-        <p >${photographer.tagline}</p>
+        <h2 >${photographer.city}, ${photographer.country}</h2>
+        <h3 >${photographer.tagline}</h3>
       </div>
       <button  class="contact_button" onclick="displayModal()" >Contactez-moi </button>
       <div class="photographer-photo" >
@@ -185,7 +185,7 @@ class DetailPhotographerView {
           <img src="assets/photographers/Sample Photos/${photographer.name}-${photographer.id}/${media.image}" alt="${media.title}" tabindex="0" />
         
         <figcaption class="info">
-          <p>${media.title}</p>
+          <h2>${media.title}</h2>
           <p class="likes" id="likes-${index}">
             <span class="span_likes">${media.likes}</span>
             <button class="heart-button liked" data-index>
@@ -203,7 +203,7 @@ class DetailPhotographerView {
           <video src="assets/photographers/Sample Photos/${photographer.name}-${photographer.id}/${media.video}" class="video" controls autoplay tabindex="0"></video>
         
         <figcaption class="info">
-          <p>${media.title}</p>
+          <h2>${media.title}</h2>
           <p class="likes" id="likes-${index}">
             <span class="span_likes">${media.likes}</span>
             <button class="heart-button liked" data-index >

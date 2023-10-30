@@ -25,28 +25,28 @@
     </header>
     <main id="main">
       <div class="photograph-header">
-        <button  class="contact_button" onclick="displayModal()">
+        <button class="contact_button" onclick="displayModal()">
           Contactez-moi
         </button>
       </div>
-      <div class="tri" >
-        <p class="trierPar">Trier par</p>
+      <div class="tri">
+        <h2 class="trierPar">Trier par</h2>
         <div id="select" class="dropdown">
-          <button class="dropdown-button" id="toggleDropdown" >
+          <button class="dropdown-button" id="toggleDropdown">
             Popularité <i class="fa fa-chevron-down chevron"></i>
           </button>
           <div class="trait"></div>
           <div class="dropdown-content" id="dropdownContent">
-            <button id="sortByTitle" >Titre</button>
+            <button id="sortByTitle">Titre</button>
             <div class="trait traitTitre"></div>
-            <button id="sortByDate" >Date</button>
+            <button id="sortByDate">Date</button>
           </div>
         </div>
       </div>
       <div id="catalogue" tabindex="0"></div>
-      <p id="totalLikes" tabindex="0" ></p>
+      <h3 id="totalLikes" tabindex="0"></h3>
     </main>
-    <section id="contact_modal" >
+    <section id="contact_modal">
       <div class="modal">
         <header>
           <h2 class="titreModal">Contactez-moi</h2>
@@ -54,58 +54,29 @@
             src="assets/icons/close.svg"
             onclick="closeModal()"
             alt="fermer la modal"
-         
           />
         </header>
         <form>
           <div>
             <label for="prenom" id="prenom-label">Prénom</label>
-            <input
-              type="text"
-              id="prenom"
-              name="prenom"
-              aria-labelledby="modal-title prenom-label"
-             
-              required
-            />
+            <input type="text" id="prenom" name="prenom" required />
           </div>
           <div>
             <label for="nom" id="nom-label">Nom</label>
-            <input
-              type="text"
-              id="nom"
-              name="nom"
-              aria-labelledby="modal-title nom-label"
-            
-              required
-            />
+            <input type="text" id="nom" name="nom" required />
           </div>
           <div>
             <label for="email" id="email-label">Email</label>
-            <input
-              type="email"
-              id="email"
-              name="email"
-              aria-labelledby="modal-title email-label"
-     
-              required
-            />
+            <input type="email" id="email" name="email" required />
           </div>
           <div>
             <label for="message" id="message-label">Votre message</label>
-            <textarea
-              id="message"
-              name="message"
-              aria-labelledby="modal-title message-label"
-    
-              required
-            ></textarea>
+            <textarea id="message" name="message" required></textarea>
           </div>
           <button
             class="contact_button envoyer"
             type="submit"
             aria-label="Envoyer le message"
-
           >
             Envoyer
           </button>
@@ -114,8 +85,17 @@
     </section>
 
     <div id="lightbox" tabindex="0">
-      <div class="lightbox__content" aria-label="image closeup view" tabindex="0">
-        <button class="close-btn" role="button" aria-label="Fermer la lightbox" tabindex="0">
+      <div
+        class="lightbox__content"
+        aria-label="image closeup view"
+        tabindex="0"
+      >
+        <button
+          class="close-btn"
+          role="button"
+          aria-label="Fermer la lightbox"
+          tabindex="0"
+        >
           X
         </button>
         <a
@@ -123,7 +103,6 @@
           role="button"
           aria-label="Image précédente"
           tabindex="0"
-   
         >
           <i class="fa-solid fa-chevron-left"></i>
         </a>
@@ -135,9 +114,8 @@
           role="button"
           aria-label="Image suivante"
           tabindex="0"
-        
         >
-          <i class="fa-solid fa-chevron-right" ></i>
+          <i class="fa-solid fa-chevron-right"></i>
         </a>
         <div class="lightbox__title" tabindex="0">Titre du média</div>
       </div>

@@ -70,7 +70,7 @@ header {
   text-align: start;
   margin-left: auto;
 }
-.photograph-header p {
+.photograph-header h2 {
   color: #901c1c;
   font-family: DM Sans;
   font-size: 24px;
@@ -79,6 +79,14 @@ header {
   line-height: normal;
   margin: 0;
   text-align: start;
+}
+.photograph-header h3 {
+  color: #525252;
+font-family: DM Sans;
+font-size: 18px;
+font-style: normal;
+font-weight: 400;
+line-height: normal;
 }
 
 .photograph-header h1 {
@@ -273,7 +281,7 @@ form input {
 .media {
   margin-top: 40px;
 }
-.media p {
+.media h2 {
   color: #901c1c;
   font-family: DM Sans;
   font-size: 24px;
@@ -545,6 +553,12 @@ form input {
 }
 .trierPar {
   padding-top: 28px;
+  color: #000;
+font-family: DM Sans;
+font-size: 18px;
+font-style: normal;
+font-weight: 700;
+line-height: normal;
 }
 #dropdownContent {
   display: none;
